@@ -326,6 +326,8 @@ request_data() {
                     warn "$(get_string "install_full_node_ssl_cert_empty")"
                 done
             fi
+
+            request_node_version
         fi
     fi
 
@@ -1113,6 +1115,7 @@ install_remnanode() {
 
     sed -i "s|\$NODE_PORT|$NODE_PORT|g" docker-compose.yml
     sed -i "s|\$SECRET_KEY|$SECRET_KEY|g" docker-compose.yml
+    sed -i "s|\$NODE_VERSION|${NODE_VERSION:-latest}|g" docker-compose.yml
 
     docker compose up -d || {
         error "$(get_string "install_full_node_remnanode_error")"

@@ -157,6 +157,7 @@ sudo -E bash /opt/remnasetup/remnasetup.sh install-node
 | `DOMAIN` | Домен ноды | — |
 | `MONITOR_PORT` | Порт веб-сервера | `8443` |
 | `NODE_PORT` | Порт ноды | `3001` |
+| `NODE_VERSION` | Версия образа ноды — `latest` или `X.Y.Z` (напр. `3.2.2`) | `latest` |
 | `SECRET_KEY` | Ключ подключения к панели | — |
 | `WEBSERVER` | `caddy` или `nginx` | — |
 | `CF_API_TOKEN` | Cloudflare API токен для Caddy (Zone:DNS:Edit) | — |

@@ -314,6 +314,38 @@ ensure_caddy_cloudflare() {
     return 1
 }
 
+# Ask for / validate the Remnawave node image tag. Accepts "latest" or X.Y.Z
+# (e.g. 3.2.2). Sets NODE_VERSION (default "latest").
+# NOTE: panel/node versions must be compatible — e.g. panel 2.7.4 does not work
+# with node 3.3.2 (changed panel<->node handshake); pin an older tag if needed.
+request_node_version() {
+    if [[ -n "$NODE_VERSION" ]]; then
+        if [[ "$NODE_VERSION" =~ ^(latest|[0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            info "NODE_VERSION=$NODE_VERSION"
+            return 0
+        else
+            error "$(get_string "install_node_version_invalid")"
+            exit 1
+        fi
+    fi
+
+    if is_non_interactive; then
+        NODE_VERSION="latest"
+        info "Non-interactive mode: NODE_VERSION defaulted to $NODE_VERSION"
+        return 0
+    fi
+
+    while true; do
+        question "$(get_string "install_node_enter_version")"
+        NODE_VERSION="$REPLY"
+        NODE_VERSION="${NODE_VERSION:-latest}"
+        if [[ "$NODE_VERSION" =~ ^(latest|[0-9]+\.[0-9]+\.[0-9]+)$ ]]; then
+            break
+        fi
+        warn "$(get_string "install_node_version_invalid")"
+    done
+}
+
 # Store the Cloudflare API token as a systemd environment variable for caddy,
 # so {env.CF_API_TOKEN} in the Caddyfile resolves at runtime (token is never
 # written into the Caddyfile itself).
@@ -356,3 +388,4 @@ export -f derive_base_domain
 export -f deploy_random_site
 export -f ensure_caddy_cloudflare
 export -f set_caddy_cf_token
+export -f request_node_version

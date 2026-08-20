@@ -364,6 +364,8 @@ LANG_STRINGS["en_fail2ban_installing"]="Installing fail2ban..."
 LANG_STRINGS["en_fail2ban_already_installed"]="fail2ban is already installed"
 LANG_STRINGS["en_fail2ban_start_warn"]="fail2ban failed to start — check: systemctl status fail2ban"
 LANG_STRINGS["en_fail2ban_configured"]="fail2ban configured (sshd jail enabled)"
+LANG_STRINGS["en_install_node_enter_version"]="Enter node version — 'latest' or X.Y.Z, e.g. 3.2.2 (default latest):"
+LANG_STRINGS["en_install_node_version_invalid"]="Invalid version. Use 'latest' or a version like 3.2.2."
 
 LANG_STRINGS["ru_install_caddy_node_already_installed"]="Caddy уже установлен"
 LANG_STRINGS["ru_install_caddy_node_update_config"]="Хотите скорректировать конфигурацию Caddy? (y/n):"
@@ -396,6 +398,8 @@ LANG_STRINGS["ru_fail2ban_installing"]="Установка fail2ban..."
 LANG_STRINGS["ru_fail2ban_already_installed"]="fail2ban уже установлен"
 LANG_STRINGS["ru_fail2ban_start_warn"]="fail2ban не запустился — проверьте: systemctl status fail2ban"
 LANG_STRINGS["ru_fail2ban_configured"]="fail2ban настроен (jail sshd включён)"
+LANG_STRINGS["ru_install_node_enter_version"]="Введите версию ноды — 'latest' или X.Y.Z, напр. 3.2.2 (по умолчанию latest):"
+LANG_STRINGS["ru_install_node_version_invalid"]="Неверная версия. Используйте 'latest' или вид 3.2.2."
 
 # Remnanode-install-nginx
 LANG_STRINGS["en_install_nginx_node_already_installed"]="Nginx is already installed"
