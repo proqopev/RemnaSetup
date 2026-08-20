@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jonas Weber — Web Developer</title>
+<meta name="description" content="Freelance web developer building fast, accessible sites and small web apps.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Jonas Weber — Web Developer">
+<meta property="og:description" content="Freelance web developer building fast, accessible sites and small web apps.">
+<meta name="theme-color" content="#0e1116">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%230e1116%22/><text x=%2250%22 y=%2264%22 font-size=%2244%22 fill=%22%2364d2a3%22 text-anchor=%22middle%22 font-family=%22monospace%22>&lt;/&gt;</text></svg>">
+<style>
+  :root { --bg:#0e1116; --panel:#161b22; --ink:#e6edf3; --muted:#8b949e; --accent:#64d2a3; --line:#242b34; }
+  * { box-sizing: border-box; }
+  body { margin:0; background: var(--bg); color: var(--ink); font-family: 'Segoe UI', -apple-system, Helvetica, Arial, sans-serif; line-height:1.6; }
+  code, .mono { font-family: 'JetBrains Mono', 'SFMono-Regular', Consolas, monospace; }
+  header { display:flex; justify-content:space-between; align-items:center; padding: 22px 6vw; border-bottom:1px solid var(--line); }
+  .logo { font-family: monospace; font-weight:700; }
+  .logo b { color: var(--accent); }
+  nav a { color: var(--muted); text-decoration:none; margin-left:24px; font-size:0.9rem; }
+  nav a:hover { color: var(--ink); }
+  .hero { max-width: 760px; margin:0 auto; padding: 80px 6vw 40px; }
+  .hero .tag { color: var(--accent); font-family: monospace; font-size:0.85rem; }
+  .hero h1 { font-size: 2.6rem; line-height:1.15; margin: 12px 0 16px; }
+  .hero p { color: var(--muted); font-size:1.1rem; max-width: 560px; }
+  .hero .links { margin-top: 26px; }
+  .hero .links a { color: var(--ink); text-decoration:none; border:1px solid var(--line); padding:9px 18px; border-radius:8px; font-size:0.9rem; margin-right:10px; }
+  .hero .links a.primary { background: var(--accent); color:#0e1116; border-color:var(--accent); font-weight:600; }
+  .work { max-width: 900px; margin: 30px auto 70px; padding: 0 6vw; }
+  .work h2 { font-size:0.85rem; text-transform:uppercase; letter-spacing:2px; color:var(--muted); margin-bottom:20px; }
+  .grid { display:grid; grid-template-columns: repeat(2,1fr); gap:16px; }
+  .proj { background: var(--panel); border:1px solid var(--line); border-radius:12px; padding:20px; }
+  .proj h3 { margin:0 0 8px; font-size:1.05rem; }
+  .proj p { margin:0 0 14px; color:var(--muted); font-size:0.9rem; }
+  .proj .stack span { display:inline-block; font-family:monospace; font-size:0.72rem; color:var(--accent); background:rgba(100,210,163,0.1); padding:3px 8px; border-radius:6px; margin-right:6px; }
+  footer { border-top:1px solid var(--line); text-align:center; padding: 28px; color:var(--muted); font-size:0.85rem; }
+  footer a { color:var(--muted); text-decoration:none; }
+  footer a:hover { color:var(--ink); }
+  @media (max-width:680px){ nav{display:none;} .grid{grid-template-columns:1fr;} .hero h1{font-size:2rem;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">jonas<b>.dev</b></div>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="tag">// freelance web developer</div>
+  <h1>I build fast, honest websites.</h1>
+  <p>Independent developer working with small teams and studios on sites and web apps that load quickly and hold up over time. Currently taking on projects for autumn.</p>
+  <div class="links">
+    <a class="primary" href="#contact">Get in touch</a>
+    <a href="#work">See recent work</a>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <h2>Selected work</h2>
+  <div class="grid">
+    <div class="proj">
+      <h3>Harbour Wines</h3>
+      <p>Rebuilt an online shop for a regional importer — checkout, stock, and a lot less loading time.</p>
+      <div class="stack"><span>Astro</span><span>Postgres</span><span>Stripe</span></div>
+    </div>
+    <div class="proj">
+      <h3>Field Notes CMS</h3>
+      <p>A tiny publishing tool for a photography collective, built around plain Markdown.</p>
+      <div class="stack"><span>Node</span><span>SQLite</span><span>htmx</span></div>
+    </div>
+    <div class="proj">
+      <h3>Rota</h3>
+      <p>Shift planning for a café group — drag-and-drop schedule that the managers actually use.</p>
+      <div class="stack"><span>TypeScript</span><span>React</span></div>
+    </div>
+    <div class="proj">
+      <h3>Meridian Docs</h3>
+      <p>Documentation site and search for an open-source library, kept fast under a big page count.</p>
+      <div class="stack"><span>Vite</span><span>Preact</span></div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  &copy; 2026 Jonas Weber &middot; <a href="#contact">hello@jonasweber.dev</a> &middot; Based in Vienna, working remotely
+</footer>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northgate Advisory — Business &amp; Financial Consulting</title>
+<meta name="description" content="Northgate Advisory helps small and mid-sized businesses with financial planning, tax structuring, and operational strategy.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Northgate Advisory — Business &amp; Financial Consulting">
+<meta property="og:description" content="Clear financial strategy for growing businesses.">
+<meta name="theme-color" content="#1b2a4a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%231b2a4a%22/><text x=%2250%22 y=%2266%22 font-size=%2255%22 fill=%22%23e8b23d%22 text-anchor=%22middle%22 font-family=%22Georgia,serif%22>N</text></svg>">
+<style>
+  :root {
+    --ink: #1b2a4a;
+    --gold: #e8b23d;
+    --bg: #f7f5f0;
+    --muted: #6b7280;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: 'Georgia', 'Times New Roman', serif;
+    color: var(--ink);
+    background: var(--bg);
+    line-height: 1.6;
+  }
+  header {
+    background: var(--ink);
+    color: #fff;
+    padding: 22px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  header .logo { font-size: 1.3rem; letter-spacing: 1px; font-weight: bold; }
+  header .logo span { color: var(--gold); }
+  nav a {
+    color: #cbd3e1;
+    text-decoration: none;
+    margin-left: 28px;
+    font-size: 0.95rem;
+    font-family: Arial, sans-serif;
+  }
+  nav a:hover { color: var(--gold); }
+  .hero {
+    padding: 90px 6vw 70px;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .hero h1 { font-size: 2.4rem; margin-bottom: 18px; }
+  .hero p { color: var(--muted); font-size: 1.1rem; font-family: Arial, sans-serif; }
+  .hero .cta {
+    display: inline-block;
+    margin-top: 28px;
+    padding: 12px 30px;
+    background: var(--gold);
+    color: var(--ink);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-weight: bold;
+    border-radius: 2px;
+  }
+  .services {
+    background: #fff;
+    padding: 60px 6vw;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .service {
+    border-top: 3px solid var(--gold);
+    padding-top: 16px;
+  }
+  .service h3 { margin: 0 0 10px; font-size: 1.15rem; }
+  .service p { color: var(--muted); font-family: Arial, sans-serif; font-size: 0.95rem; margin: 0; }
+  .quote {
+    max-width: 700px;
+    margin: 60px auto;
+    text-align: center;
+    padding: 0 20px;
+    font-style: italic;
+    color: var(--muted);
+  }
+  footer {
+    background: var(--ink);
+    color: #9aa5bb;
+    padding: 30px 6vw;
+    font-family: Arial, sans-serif;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  @media (max-width: 700px) {
+    .services { grid-template-columns: 1fr; }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">NORTHGATE <span>ADVISORY</span></div>
+  <nav>
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Clear financial strategy for growing businesses</h1>
+  <p>We work with founders and finance teams to bring structure, discipline, and long-term thinking to their numbers — without the jargon.</p>
+  <a class="cta" href="#contact">Book a consultation</a>
+</section>
+
+<section class="services" id="services">
+  <div class="service">
+    <h3>Financial Planning</h3>
+    <p>Cash flow modelling, budgeting frameworks, and forecasting built around how your business actually operates.</p>
+  </div>
+  <div class="service">
+    <h3>Tax Structuring</h3>
+    <p>Practical guidance on entity structure and tax efficiency, coordinated with your existing accountant.</p>
+  </div>
+  <div class="service">
+    <h3>Operational Review</h3>
+    <p>An outside look at process, headcount, and spend to find where the business is quietly leaking value.</p>
+  </div>
+</section>
+
+<div class="quote">
+  "Northgate didn't just hand us a report — they sat with our team until the numbers made sense to everyone in the room."
+</div>
+
+<footer id="contact">
+  Northgate Advisory &middot; est. 2014 &middot; hello@northgateadvisory.com &middot; 14 Wharf Street, Leeds LS1
+</footer>
+</body>
+</html>

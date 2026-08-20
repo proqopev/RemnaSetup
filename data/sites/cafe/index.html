@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kastanie — Coffee &amp; Bakery</title>
+<meta name="description" content="Neighbourhood coffee house and bakery, open daily from 8am.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Kastanie — Coffee &amp; Bakery">
+<meta property="og:description" content="Neighbourhood coffee house and bakery, open daily from 8am.">
+<meta name="theme-color" content="#3d2b1f">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%233d2b1f%22/><path d=%22M32 45 a18 18 0 1 0 36 0 z%22 fill=%22%23f2e4d0%22/></svg>">
+<style>
+  :root { --brown:#3d2b1f; --cream:#f6ede0; --accent:#c96a3b; --muted:#7a6c5d; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: Georgia, 'Iowan Old Style', serif; background: var(--cream); color: var(--brown); }
+  header {
+    padding: 26px 6vw; display:flex; justify-content:space-between; align-items:center;
+    border-bottom: 2px solid var(--brown);
+  }
+  .logo { font-size: 1.6rem; letter-spacing: 1px; }
+  nav a { color: var(--brown); text-decoration:none; margin-left: 24px; font-family: Arial, sans-serif; font-size:0.9rem; text-transform: uppercase; letter-spacing: 1px; }
+  .hero {
+    padding: 70px 6vw; text-align:center;
+    background: linear-gradient(180deg, rgba(201,106,59,0.08), transparent);
+  }
+  .hero h1 { font-size: 2.5rem; margin-bottom: 14px; }
+  .hero p { color: var(--muted); font-family: Arial, sans-serif; font-size: 1.05rem; max-width: 560px; margin: 0 auto; }
+  .hours {
+    display:inline-block; margin-top: 26px; padding: 14px 26px; border:1px solid var(--brown); font-family: Arial, sans-serif; font-size:0.9rem;
+  }
+  .menu {
+    max-width: 720px; margin: 60px auto; padding: 0 20px;
+  }
+  .menu h2 { text-align:center; font-size:1.1rem; text-transform:uppercase; letter-spacing:3px; color: var(--muted); margin-bottom: 30px; font-family: Arial, sans-serif; }
+  .menu-item { display:flex; justify-content:space-between; padding: 14px 0; border-bottom: 1px dotted #c9bba5; }
+  .menu-item .name { font-size: 1.05rem; }
+  .menu-item .desc { display:block; font-family: Arial, sans-serif; font-size:0.85rem; color: var(--muted); margin-top: 3px; }
+  .menu-item .price { font-family: Arial, sans-serif; white-space: nowrap; padding-left: 16px; }
+  footer {
+    text-align:center; padding: 30px; font-family: Arial, sans-serif; font-size:0.85rem; color: var(--muted);
+    border-top: 2px solid var(--brown);
+  }
+  @media (max-width:640px) { nav { display:none; } .hero h1{font-size:1.9rem;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Kastanie</div>
+  <nav>
+    <a href="#menu">Menu</a>
+    <a href="#about">About</a>
+    <a href="#visit">Visit</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Coffee, bread, and a quiet corner</h1>
+  <p>A small neighbourhood place for slow mornings — house-roasted coffee and bread baked before sunrise.</p>
+  <div class="hours">Mon–Sat 8:00–18:00 &nbsp;·&nbsp; Sun 9:00–15:00</div>
+</section>
+
+<section class="menu" id="menu">
+  <h2>From the counter</h2>
+  <div class="menu-item">
+    <div><span class="name">Filter coffee</span><span class="desc">Rotating single origin, ask what's on today</span></div>
+    <div class="price">3.20</div>
+  </div>
+  <div class="menu-item">
+    <div><span class="name">Cardamom bun</span><span class="desc">Baked in-house every morning</span></div>
+    <div class="price">2.80</div>
+  </div>
+  <div class="menu-item">
+    <div><span class="name">Rye sourdough</span><span class="desc">Whole loaf, half loaf on request</span></div>
+    <div class="price">5.50</div>
+  </div>
+  <div class="menu-item">
+    <div><span class="name">Oat porridge</span><span class="desc">With seasonal fruit compote</span></div>
+    <div class="price">4.10</div>
+  </div>
+</section>
+
+<footer id="visit">
+  Kastanie Coffee &amp; Bakery &middot; Gärtnerstraße 12 &middot; hello@kastanie-cafe.de &middot; Reservations for groups of 6+
+</footer>
+</body>
+</html>

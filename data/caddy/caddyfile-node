@@ -1,0 +1,27 @@
+{
+	email $ACME_EMAIL
+	acme_dns cloudflare {env.CF_API_TOKEN}
+}
+
+*.$BASE_DOMAIN:$MONITOR_PORT {
+	tls {
+		dns cloudflare {env.CF_API_TOKEN}
+	}
+
+	@local {
+		remote_ip 127.0.0.1 ::1
+	}
+
+	handle @local {
+		root * /var/www/site
+		file_server
+	}
+
+	handle {
+		abort
+	}
+
+	handle_errors {
+		respond "Not Found" 404
+	}
+}

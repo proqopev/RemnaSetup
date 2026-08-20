@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Foxglove Books — Independent Bookshop</title>
+<meta name="description" content="An independent bookshop for new and secondhand titles, with regular readings and a small café at the back.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Foxglove Books — Independent Bookshop">
+<meta property="og:description" content="New and secondhand books, readings, and a quiet corner to sit.">
+<meta name="theme-color" content="#2b4a3f">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2216%22 fill=%22%232b4a3f%22/><path d=%22M28 30 h20 a6 6 0 0 1 6 6 v34 a6 6 0 0 0 -6 -6 h-20 z%22 fill=%22%23e7d9b8%22/><path d=%22M72 30 h-20 a6 6 0 0 0 -6 6 v34 a6 6 0 0 1 6 -6 h20 z%22 fill=%22%23cbbf9a%22/></svg>">
+<style>
+  :root { --ink:#22332c; --green:#2b4a3f; --paper:#f4f0e6; --rose:#b5654a; --muted:#6f6a5c; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: 'Iowan Old Style', Georgia, 'Times New Roman', serif; background: var(--paper); color: var(--ink); line-height:1.6; }
+  header { display:flex; justify-content:space-between; align-items:center; padding: 24px 6vw; border-bottom: 1px solid #ddd6c4; }
+  .logo { font-size: 1.5rem; letter-spacing:0.5px; }
+  .logo b { color: var(--green); }
+  nav a { color: var(--ink); text-decoration:none; margin-left: 26px; font-family: Arial, sans-serif; font-size: 0.85rem; text-transform: uppercase; letter-spacing:1px; }
+  nav a:hover { color: var(--rose); }
+  .hero { max-width: 760px; margin: 0 auto; padding: 66px 6vw 30px; text-align:center; }
+  .hero h1 { font-size: 2.4rem; line-height:1.2; margin:0 0 16px; }
+  .hero p { color: var(--muted); font-size: 1.1rem; }
+  .shelf { display:flex; gap:10px; justify-content:center; margin: 34px auto 0; max-width: 560px; }
+  .book { height: 130px; border-radius: 3px 5px 5px 3px; flex:1; box-shadow: inset -6px 0 10px -6px rgba(0,0,0,0.35); }
+  .book:nth-child(1){ background:#7a4a3a; } .book:nth-child(2){ background:#3f5b52; }
+  .book:nth-child(3){ background:#a98a4b; } .book:nth-child(4){ background:#5a4763; }
+  .book:nth-child(5){ background:#8f5a55; } .book:nth-child(6){ background:#42566b; }
+  .events { max-width: 720px; margin: 60px auto; padding: 0 20px; }
+  .events h2 { text-align:center; font-family: Arial, sans-serif; font-size: 0.95rem; text-transform: uppercase; letter-spacing:3px; color: var(--muted); margin-bottom: 28px; }
+  .event { display:flex; gap:20px; padding: 16px 0; border-bottom: 1px solid #e2dccb; }
+  .event .date { font-family: Arial, sans-serif; font-size:0.8rem; color: var(--rose); text-transform:uppercase; letter-spacing:1px; width:96px; flex-shrink:0; padding-top:3px; }
+  .event .what b { display:block; font-size: 1.08rem; }
+  .event .what span { color: var(--muted); font-family: Arial, sans-serif; font-size:0.88rem; }
+  footer { text-align:center; padding: 34px; font-family: Arial, sans-serif; font-size:0.85rem; color: var(--muted); border-top: 1px solid #ddd6c4; }
+  @media (max-width:640px){ nav{display:none;} .hero h1{font-size:1.9rem;} .event{flex-direction:column; gap:4px;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Fox<b>glove</b> Books</div>
+  <nav>
+    <a href="#events">Events</a>
+    <a href="#about">About</a>
+    <a href="#visit">Visit</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Good books, secondhand and new</h1>
+  <p>A small corner shop for readers — carefully kept shelves, a rotating table of staff picks, and a kettle that's usually on.</p>
+  <div class="shelf">
+    <div class="book"></div><div class="book"></div><div class="book"></div>
+    <div class="book"></div><div class="book"></div><div class="book"></div>
+  </div>
+</section>
+
+<section class="events" id="events">
+  <h2>What's on</h2>
+  <div class="event">
+    <div class="date">Thu · 21 Aug</div>
+    <div class="what"><b>Evening reading: short fiction</b><span>Three local writers, 7pm. Free, no booking needed.</span></div>
+  </div>
+  <div class="event">
+    <div class="date">Sat · 30 Aug</div>
+    <div class="what"><b>Children's story hour</b><span>Picture books and biscuits, 10:30am. Ages 3–7.</span></div>
+  </div>
+  <div class="event">
+    <div class="date">Wed · 10 Sep</div>
+    <div class="what"><b>Reading group: this month's title</b><span>Copies at the counter now — everyone welcome, 6:30pm.</span></div>
+  </div>
+</section>
+
+<footer id="visit">
+  &copy; 2026 Foxglove Books &middot; 9 Corn Exchange, York &middot; hello@foxglovebooks.co.uk &middot; Open Tue–Sun
+</footer>
+</body>
+</html>

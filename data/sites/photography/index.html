@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mira Lund Photography — Portraits &amp; Editorial</title>
+<meta name="description" content="Portrait and editorial photography based in northern Europe, available for travel.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Mira Lund Photography — Portraits &amp; Editorial">
+<meta property="og:description" content="Portrait and editorial photography, available for travel.">
+<meta name="theme-color" content="#111214">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2245%22 fill=%22%23111%22/><circle cx=%2250%22 cy=%2250%22 r=%2216%22 fill=%22none%22 stroke=%22%23fff%22 stroke-width=%226%22/></svg>">
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: #111214;
+    color: #eae7e1;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+  }
+  header {
+    padding: 40px 8vw 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 1px solid #2a2b2e;
+  }
+  header .name { font-size: 1.4rem; letter-spacing: 4px; text-transform: uppercase; }
+  nav a {
+    color: #8f8c86;
+    text-decoration: none;
+    margin-left: 24px;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  nav a:hover { color: #eae7e1; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    padding: 4px 4px 0;
+  }
+  .grid div {
+    aspect-ratio: 4 / 5;
+    background: linear-gradient(160deg, var(--c1), var(--c2));
+  }
+  .grid div:nth-child(1) { --c1:#3a3d42; --c2:#17181a; }
+  .grid div:nth-child(2) { --c1:#4a4038; --c2:#1a1512; }
+  .grid div:nth-child(3) { --c1:#2f3a3d; --c2:#101617; }
+  .grid div:nth-child(4) { --c1:#403a4a; --c2:#151217; }
+  .grid div:nth-child(5) { --c1:#3d3a2f; --c2:#161510; }
+  .grid div:nth-child(6) { --c1:#3a4238; --c2:#121712; }
+  .about {
+    max-width: 620px;
+    margin: 70px auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+  .about h2 { font-weight: 300; letter-spacing: 2px; text-transform: uppercase; font-size: 1rem; color: #8f8c86; }
+  .about p { line-height: 1.8; font-size: 1.05rem; color: #cfccc4; }
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #6b6963;
+    font-size: 0.8rem;
+    border-top: 1px solid #2a2b2e;
+  }
+  @media (max-width: 640px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    nav { display: none; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="name">Mira Lund</div>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="grid" id="work">
+  <div></div><div></div><div></div>
+  <div></div><div></div><div></div>
+</section>
+
+<section class="about" id="about">
+  <h2>About</h2>
+  <p>I make portraits and editorial work that favour quiet moments over polish. Based between Helsinki and Riga, available for assignments across the region. Selected clients and publications on request.</p>
+</section>
+
+<footer id="contact">
+  &copy; 2026 Mira Lund Photography &middot; studio@miralund.com &middot; by appointment only
+</footer>
+</body>
+</html>

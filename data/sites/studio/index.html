@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Still Point — Yoga &amp; Pilates Studio</title>
+<meta name="description" content="A small yoga and pilates studio with morning and evening classes for all levels.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Still Point — Yoga &amp; Pilates Studio">
+<meta property="og:description" content="Morning and evening classes for all levels. Drop in or join a course.">
+<meta name="theme-color" content="#5b6b62">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2250%22 fill=%22%23eef1ec%22/><circle cx=%2250%22 cy=%2250%22 r=%2226%22 fill=%22none%22 stroke=%22%235b6b62%22 stroke-width=%224%22/><circle cx=%2250%22 cy=%2250%22 r=%228%22 fill=%22%23a9805a%22/></svg>">
+<style>
+  :root { --ink:#2f3a34; --sage:#5b6b62; --sand:#a9805a; --bg:#f3f5f1; --muted:#7c857e; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: 'Segoe UI', -apple-system, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--ink); line-height:1.6; }
+  header { display:flex; justify-content:space-between; align-items:center; padding: 22px 6vw; }
+  .logo { font-weight:600; letter-spacing:3px; text-transform:uppercase; font-size:1.05rem; }
+  .logo i { color: var(--sand); font-style:normal; }
+  nav a { color: var(--sage); text-decoration:none; margin-left:24px; font-size:0.85rem; letter-spacing:1px; }
+  nav a:hover { color: var(--ink); }
+  .hero { text-align:center; padding: 80px 6vw 50px; max-width: 720px; margin:0 auto; }
+  .hero h1 { font-weight:300; font-size: 2.7rem; line-height:1.2; margin:0 0 18px; }
+  .hero h1 b { font-weight:600; }
+  .hero p { color: var(--muted); font-size:1.1rem; }
+  .book-btn { display:inline-block; margin-top:26px; padding:12px 30px; background: var(--sage); color:#fff; text-decoration:none; border-radius:30px; font-size:0.9rem; letter-spacing:0.5px; }
+  .schedule { max-width: 760px; margin: 40px auto 70px; padding: 0 20px; }
+  .schedule h2 { text-align:center; font-size:0.85rem; text-transform:uppercase; letter-spacing:3px; color:var(--muted); margin-bottom:26px; }
+  .cls { display:flex; align-items:center; gap:18px; padding:15px 0; border-bottom:1px solid #e2e6df; }
+  .cls .time { width:120px; flex-shrink:0; color:var(--sage); font-weight:600; font-size:0.92rem; }
+  .cls .title { flex:1; }
+  .cls .title b { display:block; font-size:1.02rem; font-weight:600; }
+  .cls .title span { color:var(--muted); font-size:0.86rem; }
+  .cls .level { font-size:0.72rem; text-transform:uppercase; letter-spacing:1px; color:var(--sand); border:1px solid #e0d3c4; padding:3px 10px; border-radius:20px; white-space:nowrap; }
+  footer { text-align:center; padding:34px; font-size:0.85rem; color:var(--muted); border-top:1px solid #e2e6df; }
+  @media (max-width:640px){ nav{display:none;} .hero h1{font-size:2rem;} .cls .time{width:96px;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Still<i>·</i>Point</div>
+  <nav>
+    <a href="#schedule">Schedule</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Move a little, <b>breathe a lot</b></h1>
+  <p>A small, unhurried studio in the old mill quarter. Mats and props provided — just come as you are.</p>
+  <a class="book-btn" href="#schedule">See the timetable</a>
+</section>
+
+<section class="schedule" id="schedule">
+  <h2>Weekly classes</h2>
+  <div class="cls">
+    <div class="time">Mon 07:30</div>
+    <div class="title"><b>Slow Flow</b><span>Gentle start to the week, breath-led</span></div>
+    <div class="level">All levels</div>
+  </div>
+  <div class="cls">
+    <div class="time">Tue 18:30</div>
+    <div class="title"><b>Mat Pilates</b><span>Core, stability, and control</span></div>
+    <div class="level">Improvers</div>
+  </div>
+  <div class="cls">
+    <div class="time">Thu 07:30</div>
+    <div class="title"><b>Vinyasa</b><span>A warmer, flowing practice</span></div>
+    <div class="level">Some experience</div>
+  </div>
+  <div class="cls">
+    <div class="time">Sat 09:00</div>
+    <div class="title"><b>Restore &amp; Rest</b><span>Long holds, bolsters, and quiet</span></div>
+    <div class="level">All levels</div>
+  </div>
+</section>
+
+<footer id="contact">
+  &copy; 2026 Still Point Studio &middot; Mill Yard, Unit 4 &middot; hello@stillpointstudio.com
+</footer>
+</body>
+</html>

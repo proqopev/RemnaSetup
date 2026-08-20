@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ledgerly — Simple invoicing for freelancers</title>
+<meta name="description" content="Ledgerly is invoicing and expense tracking built for freelancers and small teams.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ledgerly — Simple invoicing for freelancers">
+<meta property="og:description" content="Send invoices, track expenses, and get paid faster.">
+<meta name="theme-color" content="#4f46e5">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%234f46e5%22/><path d=%22M30 65 L50 30 L70 65 Z%22 fill=%22%23fff%22/></svg>">
+<style>
+  :root { --ink:#1e1b2e; --accent:#4f46e5; --accent2:#22d3ee; --bg:#faf9ff; --muted:#6b7280; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; color: var(--ink); background: var(--bg); }
+  header {
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 20px 6vw;
+  }
+  .logo { font-weight: 800; font-size: 1.3rem; }
+  .logo span { color: var(--accent); }
+  nav a { color:#4b4a5a; text-decoration:none; margin-left:26px; font-size:0.95rem; }
+  .signup-btn { background: var(--ink); color:#fff; padding:9px 18px; border-radius:8px; text-decoration:none; font-size:0.9rem; }
+  .hero {
+    text-align:center; padding: 70px 6vw 50px; max-width: 760px; margin: 0 auto;
+  }
+  .hero h1 { font-size: 2.6rem; line-height:1.15; margin-bottom: 18px; }
+  .hero h1 .hl { background: linear-gradient(90deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+  .hero p { color: var(--muted); font-size: 1.15rem; }
+  .hero-actions { margin-top: 30px; }
+  .btn-primary { background: var(--accent); color:#fff; padding: 13px 26px; border-radius: 8px; text-decoration:none; font-weight:600; margin-right: 12px; }
+  .btn-secondary { color: var(--ink); padding: 13px 20px; text-decoration:none; font-weight:600; }
+  .mockup {
+    max-width: 900px; margin: 40px auto 70px; padding: 0 20px;
+  }
+  .mockup .card {
+    background:#fff; border-radius:16px; box-shadow: 0 30px 60px -20px rgba(79,70,229,0.25);
+    padding: 26px; border: 1px solid #ececf5;
+  }
+  .mockup .row { display:flex; justify-content:space-between; padding: 10px 0; border-bottom:1px solid #f1f0fa; font-size:0.9rem; color:#4b4a5a; }
+  .mockup .row:last-child { border-bottom:none; }
+  .features {
+    max-width: 1000px; margin: 0 auto; padding: 40px 6vw 80px;
+    display:grid; grid-template-columns: repeat(3,1fr); gap: 26px;
+  }
+  .feature h3 { font-size: 1.05rem; margin-bottom:8px; }
+  .feature p { color: var(--muted); font-size: 0.92rem; margin:0; }
+  footer { text-align:center; padding: 30px; color:#9997a8; font-size:0.85rem; border-top:1px solid #ececf5; }
+  @media (max-width:700px) { .features{grid-template-columns:1fr;} nav{display:none;} .hero h1{font-size:2rem;} }
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Ledger<span>ly</span></div>
+  <nav>
+    <a href="#features">Features</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#docs">Docs</a>
+  </nav>
+  <a class="signup-btn" href="#signup">Sign up free</a>
+</header>
+
+<section class="hero">
+  <h1>Invoicing that gets out of <span class="hl">your way</span></h1>
+  <p>Send invoices, track expenses, and get paid faster — built for freelancers who'd rather be doing the actual work.</p>
+  <div class="hero-actions">
+    <a class="btn-primary" href="#signup">Start free trial</a>
+    <a class="btn-secondary" href="#docs">View docs →</a>
+  </div>
+</section>
+
+<section class="mockup">
+  <div class="card">
+    <div class="row"><span>Invoice #0192 — Studio Nine</span><span>$1,240.00</span></div>
+    <div class="row"><span>Invoice #0191 — Colt &amp; Rae</span><span>$860.00</span></div>
+    <div class="row"><span>Invoice #0190 — Freehand Co.</span><span>$2,015.00</span></div>
+  </div>
+</section>
+
+<section class="features" id="features">
+  <div class="feature">
+    <h3>Recurring invoices</h3>
+    <p>Set it once, get paid automatically every month.</p>
+  </div>
+  <div class="feature">
+    <h3>Expense tracking</h3>
+    <p>Snap a receipt, tag a client, done.</p>
+  </div>
+  <div class="feature">
+    <h3>Client portal</h3>
+    <p>A clean page your clients actually want to use.</p>
+  </div>
+</section>
+
+<footer id="signup">
+  &copy; 2026 Ledgerly Inc. &middot; support@ledgerly.io &middot; <a href="#terms" style="color:inherit">Terms</a> &middot; <a href="#privacy" style="color:inherit">Privacy</a>
+</footer>
+</body>
+</html>
