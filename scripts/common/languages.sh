@@ -374,6 +374,13 @@ LANG_STRINGS["en_warp_routing_added"]="WARP routing rules (PostUp/PostDown) adde
 LANG_STRINGS["en_warp_routing_done"]="WARP egress routing configured (fwmark 1 -> warp)."
 LANG_STRINGS["en_warp_routing_verify"]="Verify (marked traffic must go via warp):"
 LANG_STRINGS["en_warp_routing_panel_hint"]="Now in the panel add outbound {tag: warp, freedom, sockopt.mark=1} + routing rule to it, and dns queryStrategy UseIPv4. Do NOT apply the profile to nodes without WARP routing."
+LANG_STRINGS["en_install_caddy_node_manual_mode"]="pre-issued wildcard cert, no ACME"
+LANG_STRINGS["en_caddy_cert_files_missing"]="Wildcard cert files not found. Upload wildcard.crt and wildcard.key first."
+LANG_STRINGS["en_caddy_cert_applied"]="Caddy configured to serve the provided wildcard cert (no ACME)."
+LANG_STRINGS["en_import_cert_start"]="Importing pre-issued wildcard cert for Caddy..."
+LANG_STRINGS["en_import_cert_no_caddy"]="Caddy is not installed. Install the node/Caddy first."
+LANG_STRINGS["en_import_cert_no_domain"]="Could not determine the domain. Set DOMAIN or BASE_DOMAIN."
+LANG_STRINGS["en_import_cert_verify"]="Certificate now served on :MONITOR_PORT (should be *.your-domain):"
 
 LANG_STRINGS["ru_install_caddy_node_already_installed"]="Caddy уже установлен"
 LANG_STRINGS["ru_install_caddy_node_update_config"]="Хотите скорректировать конфигурацию Caddy? (y/n):"
@@ -416,6 +423,13 @@ LANG_STRINGS["ru_warp_routing_added"]="Правила маршрутизации
 LANG_STRINGS["ru_warp_routing_done"]="WARP-egress маршрутизация настроена (fwmark 1 -> warp)."
 LANG_STRINGS["ru_warp_routing_verify"]="Проверка (помеченный трафик должен идти через warp):"
 LANG_STRINGS["ru_warp_routing_panel_hint"]="Теперь в панели добавь outbound {tag: warp, freedom, sockopt.mark=1} + правило маршрутизации на него и dns queryStrategy UseIPv4. НЕ применяй профиль на ноды без WARP-маршрутизации."
+LANG_STRINGS["ru_install_caddy_node_manual_mode"]="готовый wildcard-серт, без ACME"
+LANG_STRINGS["ru_caddy_cert_files_missing"]="Файлы wildcard-серта не найдены. Сначала залей wildcard.crt и wildcard.key."
+LANG_STRINGS["ru_caddy_cert_applied"]="Caddy настроен на готовый wildcard-серт (без ACME)."
+LANG_STRINGS["ru_import_cert_start"]="Импорт готового wildcard-серта для Caddy..."
+LANG_STRINGS["ru_import_cert_no_caddy"]="Caddy не установлен. Сначала поставь ноду/Caddy."
+LANG_STRINGS["ru_import_cert_no_domain"]="Не удалось определить домен. Задай DOMAIN или BASE_DOMAIN."
+LANG_STRINGS["ru_import_cert_verify"]="Сертификат теперь отдаётся на :MONITOR_PORT (должно быть *.твой-домен):"
 
 # Remnanode-install-nginx
 LANG_STRINGS["en_install_nginx_node_already_installed"]="Nginx is already installed"

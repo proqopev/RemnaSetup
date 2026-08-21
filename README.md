@@ -10,6 +10,8 @@
 
 Скрипт для установки и управления инфраструктурой **Remnawave** и **Remnanode**
 
+📖 **[Полный гайд по деплою нод (Cloudflare wildcard, маскировка, WARP, без лимитов LE)](docs/ГАЙД.md)**
+
 [![Stars](https://img.shields.io/github/stars/proqopev/RemnaSetup?style=social)](https://github.com/proqopev/RemnaSetup)
 
 </div>
@@ -224,6 +226,7 @@ sudo -E bash /opt/remnasetup/remnasetup.sh install-node
 | `install-bbr` | Только BBR |
 | `install-warp` | Только WARP |
 | `setup-warp-routing` | Пустить egress xray через уже установленный WARP (для старых нод) |
+| `import-cert` | Перевести Caddy на готовый wildcard-серт (без ACME) — для масштаба на много нод |
 | `update-node` | Обновить Remnanode |
 
 ### Переменные окружения
@@ -238,6 +241,8 @@ sudo -E bash /opt/remnasetup/remnasetup.sh install-node
 | `WEBSERVER` | `caddy` или `nginx` | — |
 | `CF_API_TOKEN` | Cloudflare API токен для Caddy (Zone:DNS:Edit) | — |
 | `ACME_EMAIL` | Email для ACME в Caddy (необязательно) | — |
+| `WILDCARD_CRT` | Путь к готовому wildcard-серту → Caddy без ACME | `/root/wildcard.crt` |
+| `WILDCARD_KEY` | Путь к ключу готового серта → Caddy без ACME | `/root/wildcard.key` |
 | `SITE_TEMPLATE` | Форсировать шаблон-маскировку (иначе случайный) | random |
 | `BASE_DOMAIN` | Явно задать зону для wildcard (иначе из `DOMAIN`) | авто |
 | `USE_PROXY_PROTOCOL` | `y` / `n` (для nginx) | — |

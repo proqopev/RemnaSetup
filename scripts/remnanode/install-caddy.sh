@@ -156,9 +156,46 @@ request_inputs() {
     fi
 }
 
+install_caddy_manual() {
+    if [[ -n "$DOMAIN" ]]; then
+        info "DOMAIN=$DOMAIN"
+    else
+        if is_non_interactive; then
+            error "DOMAIN environment variable is required in non-interactive mode."
+            exit 1
+        fi
+        while true; do
+            question "$(get_string "install_caddy_node_enter_domain")"
+            DOMAIN="$REPLY"
+            [[ -n "$DOMAIN" ]] && break
+            warn "$(get_string "install_caddy_node_domain_empty")"
+        done
+    fi
+    MONITOR_PORT="${MONITOR_PORT:-8443}"
+
+    if ! command -v caddy >/dev/null 2>&1; then
+        install_caddy
+        setup_site
+    fi
+
+    local base
+    base=$(derive_base_domain "$DOMAIN")
+    info "BASE_DOMAIN=$base ($(get_string "install_caddy_node_manual_mode"))"
+    apply_caddy_manual_cert "$base" "$MONITOR_PORT" || exit 1
+
+    success "$(get_string "install_caddy_node_installation_complete")"
+    pause_press_key "$(get_string "install_caddy_node_press_key")"
+    exit 0
+}
+
 main() {
     if ! check_caddy; then
         return 1
+    fi
+
+    if [[ -n "$WILDCARD_CRT" && -n "$WILDCARD_KEY" ]]; then
+        install_caddy_manual
+        exit 0
     fi
 
     request_inputs

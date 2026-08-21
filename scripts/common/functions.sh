@@ -365,6 +365,43 @@ EOF
     return 0
 }
 
+# Configure Caddy to serve a PRE-ISSUED wildcard cert instead of doing ACME.
+# This is how you scale to many nodes without hitting Let's Encrypt rate limits:
+# issue *.domain once on a "cert master", then distribute the crt+key and call
+# this on every node (no ACME, no Cloudflare token, no plugin needed here).
+# Inputs (env, with defaults): WILDCARD_CRT=/root/wildcard.crt WILDCARD_KEY=/root/wildcard.key
+# Args: $1 = base domain (e.g. datahubfiles.com), $2 = port (e.g. 8443)
+apply_caddy_manual_cert() {
+    local base="$1" port="$2"
+    local crt="${WILDCARD_CRT:-/root/wildcard.crt}"
+    local key="${WILDCARD_KEY:-/root/wildcard.key}"
+
+    if [[ ! -f "$crt" || ! -f "$key" ]]; then
+        error "$(get_string "caddy_cert_files_missing") ($crt / $key)"
+        return 1
+    fi
+    if [[ -z "$base" || -z "$port" ]]; then
+        error "apply_caddy_manual_cert: base domain / port not set"
+        return 1
+    fi
+
+    mkdir -p /etc/caddy/certs
+    install -m 644 "$crt" /etc/caddy/certs/wildcard.crt
+    install -m 600 "$key" /etc/caddy/certs/wildcard.key
+    id caddy >/dev/null 2>&1 && chown -R caddy:caddy /etc/caddy/certs
+
+    cp "/opt/remnasetup/data/caddy/caddyfile-node-cert" /etc/caddy/Caddyfile
+    sed -i "s|\$BASE_DOMAIN|$base|g" /etc/caddy/Caddyfile
+    sed -i "s|\$MONITOR_PORT|$port|g" /etc/caddy/Caddyfile
+    sed -i "s|\$CERT_CRT|/etc/caddy/certs/wildcard.crt|g" /etc/caddy/Caddyfile
+    sed -i "s|\$CERT_KEY|/etc/caddy/certs/wildcard.key|g" /etc/caddy/Caddyfile
+
+    systemctl enable caddy >/dev/null 2>&1 || true
+    systemctl restart caddy
+    success "$(get_string "caddy_cert_applied")"
+    return 0
+}
+
 # Set up fwmark policy routing so that traffic marked by xray (sockopt mark=1)
 # egresses through the WARP interface, while the node's own traffic stays on the
 # main interface. Idempotent — safe to run on new or already-installed nodes.
@@ -429,3 +466,4 @@ export -f ensure_caddy_cloudflare
 export -f set_caddy_cf_token
 export -f request_node_version
 export -f ensure_warp_routing
+export -f apply_caddy_manual_cert

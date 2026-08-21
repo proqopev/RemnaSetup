@@ -225,6 +225,7 @@ sudo -E bash /opt/remnasetup/remnasetup.sh install-node
 | `install-bbr` | BBR only |
 | `install-warp` | WARP only |
 | `setup-warp-routing` | Route xray egress through an already-installed WARP (for existing nodes) |
+| `import-cert` | Switch Caddy to a pre-issued wildcard cert (no ACME) — for scaling to many nodes |
 | `update-node` | Update Remnanode |
 
 ### Environment variables
@@ -239,6 +240,8 @@ sudo -E bash /opt/remnasetup/remnasetup.sh install-node
 | `WEBSERVER` | `caddy` or `nginx` | — |
 | `CF_API_TOKEN` | Cloudflare API token for Caddy (Zone:DNS:Edit) | — |
 | `ACME_EMAIL` | Email for ACME in Caddy (optional) | — |
+| `WILDCARD_CRT` | Path to a pre-issued wildcard cert → Caddy without ACME | `/root/wildcard.crt` |
+| `WILDCARD_KEY` | Path to the key of the pre-issued cert → Caddy without ACME | `/root/wildcard.key` |
 | `SITE_TEMPLATE` | Force a camouflage template (otherwise random) | random |
 | `BASE_DOMAIN` | Explicit zone for the wildcard (otherwise from `DOMAIN`) | auto |
 | `USE_PROXY_PROTOCOL` | `y` / `n` (for nginx) | — |

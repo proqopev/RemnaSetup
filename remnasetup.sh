@@ -112,8 +112,9 @@ display_remnanode_menu() {
         echo -e "${BLUE}6. Install BBR only${RESET}"
         echo -e "${BLUE}7. Install WARP-NATIVE (by distillium)${RESET}"
         echo -e "${BLUE}8. Route xray egress through WARP (existing WARP)${RESET}"
-        echo -e "${BLUE}9. Update Remnanode${RESET}"
-        echo -e "${BLUE}10. Back${RESET}"
+        echo -e "${BLUE}9. Use pre-issued wildcard cert (no ACME)${RESET}"
+        echo -e "${BLUE}10. Update Remnanode${RESET}"
+        echo -e "${BLUE}11. Back${RESET}"
     else
         echo -e "${BLUE}1. Полная установка (Remnanode + Caddy/Nginx + BBR + WARP-NATIVE (by distillium))${RESET}"
         echo -e "${BLUE}2. Только Remnanode${RESET}"
@@ -123,8 +124,9 @@ display_remnanode_menu() {
         echo -e "${BLUE}6. Только BBR${RESET}"
         echo -e "${BLUE}7. Установить WARP-NATIVE (by distillium)${RESET}"
         echo -e "${BLUE}8. Пустить egress xray через WARP (WARP уже установлен)${RESET}"
-        echo -e "${BLUE}9. Обновить Remnanode${RESET}"
-        echo -e "${BLUE}10. Назад${RESET}"
+        echo -e "${BLUE}9. Использовать готовый wildcard-серт (без ACME)${RESET}"
+        echo -e "${BLUE}10. Обновить Remnanode${RESET}"
+        echo -e "${BLUE}11. Назад${RESET}"
     fi
     echo
     read -p "$(echo -e "${BOLD_CYAN}$(get_string "select_option"):${RESET}") " REMNANODE_OPTION
@@ -217,6 +219,10 @@ handle_command() {
             run_script "${SCRIPT_DIR}/scripts/remnanode/setup-warp-routing.sh"
             exit 0
             ;;
+        import-cert)
+            run_script "${SCRIPT_DIR}/scripts/remnanode/import-cert.sh"
+            exit 0
+            ;;
         update-node)
             run_script "${SCRIPT_DIR}/scripts/remnanode/update.sh"
             exit 0
@@ -232,6 +238,7 @@ handle_command() {
             echo "  install-bbr          - Install BBR only"
             echo "  install-warp         - Install WARP only"
             echo "  setup-warp-routing   - Route xray egress through existing WARP"
+            echo "  import-cert          - Use a pre-issued wildcard cert (no ACME)"
             echo "  update-node          - Update Remnanode"
             exit 1
             ;;
@@ -283,8 +290,9 @@ main() {
                         6) run_script "${SCRIPT_DIR}/scripts/remnanode/install-bbr.sh" ;;
                         7) run_script "${SCRIPT_DIR}/scripts/remnanode/install-warp.sh" ;;
                         8) run_script "${SCRIPT_DIR}/scripts/remnanode/setup-warp-routing.sh" ;;
-                        9) run_script "${SCRIPT_DIR}/scripts/remnanode/update.sh" ;;
-                        10) break ;;
+                        9) run_script "${SCRIPT_DIR}/scripts/remnanode/import-cert.sh" ;;
+                        10) run_script "${SCRIPT_DIR}/scripts/remnanode/update.sh" ;;
+                        11) break ;;
                         *) warn "$(get_string "invalid_choice")" ;;
                     esac
                 done

@@ -1,0 +1,20 @@
+*.$BASE_DOMAIN:$MONITOR_PORT {
+	tls $CERT_CRT $CERT_KEY
+
+	@local {
+		remote_ip 127.0.0.1 ::1
+	}
+
+	handle @local {
+		root * /var/www/site
+		file_server
+	}
+
+	handle {
+		abort
+	}
+
+	handle_errors {
+		respond "Not Found" 404
+	}
+}

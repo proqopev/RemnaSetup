@@ -241,7 +241,7 @@ request_data() {
             fi
         fi
 
-        if [[ "$WEBSERVER" == "caddy" ]]; then
+        if [[ "$WEBSERVER" == "caddy" && ( -z "$WILDCARD_CRT" || -z "$WILDCARD_KEY" ) ]]; then
             if [[ -n "$CF_API_TOKEN" ]]; then
                 info "CF_API_TOKEN=***"
             elif is_non_interactive; then
@@ -853,6 +853,21 @@ install_caddy() {
     curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | tee /etc/apt/sources.list.d/caddy-stable.list
     apt-get update -y
     apt-get install -y caddy
+
+    if [[ -n "$WILDCARD_CRT" && -n "$WILDCARD_KEY" ]]; then
+        info "$(get_string "install_full_node_setup_site")"
+        deploy_random_site "/var/www/site"
+        local base_manual
+        base_manual=$(derive_base_domain "$DOMAIN")
+        info "BASE_DOMAIN=$base_manual ($(get_string "install_caddy_node_manual_mode"))"
+        apply_caddy_manual_cert "$base_manual" "$MONITOR_PORT" || exit 1
+        if command -v nginx >/dev/null 2>&1; then
+            systemctl stop nginx 2>/dev/null || true
+            systemctl disable nginx 2>/dev/null || true
+        fi
+        success "$(get_string "install_full_node_caddy_installed_success")"
+        return 0
+    fi
 
     ensure_caddy_cloudflare || {
         error "$(get_string "install_caddy_node_plugin_failed")"
