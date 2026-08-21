@@ -10,7 +10,7 @@ TEMP_DIR=$(mktemp -d)
 
 # Repository to install from. Override to use your own fork:
 #   REMNASETUP_REPO=youruser/RemnaSetup bash <(curl -fsSL .../install.sh)
-REMNASETUP_REPO="${REMNASETUP_REPO:-Capybara-z/RemnaSetup}"
+REMNASETUP_REPO="${REMNASETUP_REPO:-proqopev/RemnaSetup}"
 REMNASETUP_BRANCH="${REMNASETUP_BRANCH:-main}"
 REPO_NAME="${REMNASETUP_REPO##*/}"
 EXTRACT_DIR="${REPO_NAME}-${REMNASETUP_BRANCH}"
