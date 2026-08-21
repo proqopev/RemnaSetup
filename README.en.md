@@ -10,6 +10,8 @@
 
 Script for installing and managing **Remnawave** and **Remnanode** infrastructure
 
+📘 **[Handbook (RU)](docs/HANDBOOK.md)** — architecture, deploy, troubleshooting, gotchas, anti-ban layers
+
 [![Stars](https://img.shields.io/github/stars/proqopev/RemnaSetup?style=social)](https://github.com/proqopev/RemnaSetup)
 
 </div>

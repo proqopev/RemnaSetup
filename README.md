@@ -10,7 +10,7 @@
 
 Скрипт для установки и управления инфраструктурой **Remnawave** и **Remnanode**
 
-📖 **[Полный гайд по деплою нод (Cloudflare wildcard, маскировка, WARP, без лимитов LE)](docs/ГАЙД.md)**
+📘 **[Справочник](docs/HANDBOOK.md)** — как устроено, деплой, диагностика «что делать если…», грабли и защита от банов
 
 [![Stars](https://img.shields.io/github/stars/proqopev/RemnaSetup?style=social)](https://github.com/proqopev/RemnaSetup)
 
