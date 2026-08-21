@@ -395,6 +395,7 @@ LANG_STRINGS["en_migrate_warp_install"]="WARP not installed — installing..."
 LANG_STRINGS["en_migrate_done"]="Migration finished. Now update the panel profile:"
 LANG_STRINGS["en_migrate_panel_title"]="In the Remnawave panel for this node:"
 LANG_STRINGS["en_migrate_panel_subs"]="re-import client subscriptions (new SNI after the domain change)"
+LANG_STRINGS["en_migrate_warp_failed"]="Caddy/cert done, but WARP failed — fix it separately (menu 7), then update the panel profile:"
 
 LANG_STRINGS["ru_install_caddy_node_already_installed"]="Caddy уже установлен"
 LANG_STRINGS["ru_install_caddy_node_update_config"]="Хотите скорректировать конфигурацию Caddy? (y/n):"
@@ -458,6 +459,7 @@ LANG_STRINGS["ru_migrate_warp_install"]="WARP не установлен — ст
 LANG_STRINGS["ru_migrate_done"]="Миграция завершена. Теперь поправь профиль в панели:"
 LANG_STRINGS["ru_migrate_panel_title"]="В панели Remnawave для этой ноды:"
 LANG_STRINGS["ru_migrate_panel_subs"]="переимпортируй подписки клиентов (новый SNI после смены домена)"
+LANG_STRINGS["ru_migrate_warp_failed"]="Caddy/серт готовы, но WARP не встал — почини отдельно (меню 7), затем поправь профиль в панели:"
 
 # Remnanode-install-nginx
 LANG_STRINGS["en_install_nginx_node_already_installed"]="Nginx is already installed"

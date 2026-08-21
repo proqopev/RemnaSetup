@@ -168,6 +168,8 @@ wait_for_apt() {
             break
         fi
     done
+    # Recover from an interrupted dpkg (E: dpkg was interrupted...).
+    dpkg --configure -a >/dev/null 2>&1 || true
 }
 
 is_non_interactive() {

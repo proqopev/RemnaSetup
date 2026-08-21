@@ -102,17 +102,26 @@ main() {
     echo ""
 
     # --- WARP egress ----------------------------------------------------------
-    if [[ -f /etc/wireguard/warp.conf ]] && wg show warp >/dev/null 2>&1; then
+    # Presence of warp.conf = WARP is installed (interface may just be down) —
+    # in that case only (re)start it and add routing, never reinstall.
+    local warp_ok=1
+    if [[ -f /etc/wireguard/warp.conf ]]; then
         info "$(get_string "migrate_warp_exists")"
-        ensure_warp_routing
+        systemctl enable wg-quick@warp >/dev/null 2>&1 || true
+        systemctl restart wg-quick@warp 2>/dev/null || true
+        ensure_warp_routing || warp_ok=0
     else
         info "$(get_string "migrate_warp_install")"
-        bash "$SCRIPT_DIR/scripts/remnanode/install-warp.sh"
+        bash "$SCRIPT_DIR/scripts/remnanode/install-warp.sh" || warp_ok=0
     fi
     echo ""
 
     # --- Done + panel reminder ------------------------------------------------
-    success "$(get_string "migrate_done")"
+    if [[ "$warp_ok" -eq 1 ]]; then
+        success "$(get_string "migrate_done")"
+    else
+        warn "$(get_string "migrate_warp_failed")"
+    fi
     echo ""
     echo -e "${BOLD_CYAN}$(get_string "migrate_panel_title")${RESET}"
     echo -e "${BLUE}  • Reality: target = 127.0.0.1:$MONITOR_PORT, serverNames = $DOMAIN${RESET}"
