@@ -241,6 +241,15 @@ request_data() {
             fi
         fi
 
+        if [[ "$WEBSERVER" == "caddy" && -z "$WILDCARD_CRT" && -z "$WILDCARD_KEY" ]] \
+           && ! is_non_interactive && [[ -f /root/wildcard.crt && -f /root/wildcard.key ]]; then
+            question "$(get_string "caddy_use_ready_cert")"
+            if [[ "$REPLY" == "y" || "$REPLY" == "Y" ]]; then
+                WILDCARD_CRT=/root/wildcard.crt
+                WILDCARD_KEY=/root/wildcard.key
+            fi
+        fi
+
         if [[ "$WEBSERVER" == "caddy" && ( -z "$WILDCARD_CRT" || -z "$WILDCARD_KEY" ) ]]; then
             if [[ -n "$CF_API_TOKEN" ]]; then
                 info "CF_API_TOKEN=***"

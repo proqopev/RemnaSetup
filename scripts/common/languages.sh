@@ -381,6 +381,7 @@ LANG_STRINGS["en_import_cert_start"]="Importing pre-issued wildcard cert for Cad
 LANG_STRINGS["en_import_cert_no_caddy"]="Caddy is not installed. Install the node/Caddy first."
 LANG_STRINGS["en_import_cert_no_domain"]="Could not determine the domain. Set DOMAIN or BASE_DOMAIN."
 LANG_STRINGS["en_import_cert_verify"]="Certificate now served on :MONITOR_PORT (should be *.your-domain):"
+LANG_STRINGS["en_caddy_use_ready_cert"]="Found ready certs in /root (wildcard.crt/key). Use them for Caddy (no ACME)? (y/n):"
 
 LANG_STRINGS["ru_install_caddy_node_already_installed"]="Caddy уже установлен"
 LANG_STRINGS["ru_install_caddy_node_update_config"]="Хотите скорректировать конфигурацию Caddy? (y/n):"
@@ -430,6 +431,7 @@ LANG_STRINGS["ru_import_cert_start"]="Импорт готового wildcard-с�
 LANG_STRINGS["ru_import_cert_no_caddy"]="Caddy не установлен. Сначала поставь ноду/Caddy."
 LANG_STRINGS["ru_import_cert_no_domain"]="Не удалось определить домен. Задай DOMAIN или BASE_DOMAIN."
 LANG_STRINGS["ru_import_cert_verify"]="Сертификат теперь отдаётся на :MONITOR_PORT (должно быть *.твой-домен):"
+LANG_STRINGS["ru_caddy_use_ready_cert"]="Найдены готовые серты в /root (wildcard.crt/key). Использовать их для Caddy (без ACME)? (y/n):"
 
 # Remnanode-install-nginx
 LANG_STRINGS["en_install_nginx_node_already_installed"]="Nginx is already installed"

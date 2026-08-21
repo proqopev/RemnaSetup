@@ -193,6 +193,16 @@ main() {
         return 1
     fi
 
+    # Interactive: if ready certs are sitting in /root, offer to use them (no ACME).
+    if [[ -z "$WILDCARD_CRT" && -z "$WILDCARD_KEY" ]] && ! is_non_interactive \
+       && [[ -f /root/wildcard.crt && -f /root/wildcard.key ]]; then
+        question "$(get_string "caddy_use_ready_cert")"
+        if [[ "$REPLY" == "y" || "$REPLY" == "Y" ]]; then
+            WILDCARD_CRT=/root/wildcard.crt
+            WILDCARD_KEY=/root/wildcard.key
+        fi
+    fi
+
     if [[ -n "$WILDCARD_CRT" && -n "$WILDCARD_KEY" ]]; then
         install_caddy_manual
         exit 0
