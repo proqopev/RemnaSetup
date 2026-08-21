@@ -70,6 +70,32 @@ bash <(curl -fsSL https://raw.githubusercontent.com/proqopev/RemnaSetup/refs/hea
 > ⚠️ **Лимит Let's Encrypt: 5 сертов на `*.домен` за 7 дней.** Поэтому выпускаем ОДИН раз,
 > дальше только **раздаём файлы**. На нодах ACME больше не трогаем.
 
+### 2.4. Массовая раскатка серта на все ноды (автоматически)
+
+Если ноды прописаны в `~/.ssh/config` (вход по имени, ключом), используй
+[`tools/deploy-cert.sh`](../tools/deploy-cert.sh) — он по SSH зальёт `wildcard.crt`/`wildcard.key`
+на каждую ноду и переключит Caddy на них (`import-cert`, без ACME). Запуск из Git Bash на Windows.
+
+```bash
+# положи wildcard.crt и wildcard.key рядом со скриптом, затем:
+
+# на все хосты из ~/.ssh/config:
+./tools/deploy-cert.sh -d datahubfiles.com --from-ssh-config
+
+# или на конкретные:
+./tools/deploy-cert.sh -d datahubfiles.com node1 node2 node3
+
+# или из файла со списком:
+./tools/deploy-cert.sh -d datahubfiles.com -f hosts.txt
+```
+Опции: `-c/-k` — пути к серту/ключу, `-p` — MONITOR_PORT (8443), `-u` — ssh-юзер, `-y` — без подтверждения.
+
+**Этот же скрипт = renewal:** перевыпустил `*.домен` на мастере → скачал новые `wildcard.crt/key` →
+прогнал `deploy-cert.sh` ещё раз → серт обновился на всех нодах. Можно повесить на расписание.
+
+> Работает по **уже установленным** нодам (где Caddy стоит). Для свежих нод серт ставится сразу
+> при установке через `WILDCARD_CRT/KEY` (см. [раздел 3](#3-установка-новой-ноды)).
+
 ---
 
 ## 3. Установка новой ноды
