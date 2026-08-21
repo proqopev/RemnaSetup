@@ -109,8 +109,9 @@ display_remnanode_menu() {
         echo -e "${BLUE}5. IPv6 Management${RESET}"
         echo -e "${BLUE}6. Install BBR only${RESET}"
         echo -e "${BLUE}7. Install WARP-NATIVE (by distillium)${RESET}"
-        echo -e "${BLUE}8. Update Remnanode${RESET}"
-        echo -e "${BLUE}9. Back${RESET}"
+        echo -e "${BLUE}8. Route xray egress through WARP (existing WARP)${RESET}"
+        echo -e "${BLUE}9. Update Remnanode${RESET}"
+        echo -e "${BLUE}10. Back${RESET}"
     else
         echo -e "${BLUE}1. Полная установка (Remnanode + Caddy/Nginx + BBR + WARP-NATIVE (by distillium))${RESET}"
         echo -e "${BLUE}2. Только Remnanode${RESET}"
@@ -119,8 +120,9 @@ display_remnanode_menu() {
         echo -e "${BLUE}5. Управление IPv6${RESET}"
         echo -e "${BLUE}6. Только BBR${RESET}"
         echo -e "${BLUE}7. Установить WARP-NATIVE (by distillium)${RESET}"
-        echo -e "${BLUE}8. Обновить Remnanode${RESET}"
-        echo -e "${BLUE}9. Назад${RESET}"
+        echo -e "${BLUE}8. Пустить egress xray через WARP (WARP уже установлен)${RESET}"
+        echo -e "${BLUE}9. Обновить Remnanode${RESET}"
+        echo -e "${BLUE}10. Назад${RESET}"
     fi
     echo
     read -p "$(echo -e "${BOLD_CYAN}$(get_string "select_option"):${RESET}") " REMNANODE_OPTION
@@ -209,6 +211,10 @@ handle_command() {
             run_script "${SCRIPT_DIR}/scripts/remnanode/install-warp.sh"
             exit 0
             ;;
+        setup-warp-routing)
+            run_script "${SCRIPT_DIR}/scripts/remnanode/setup-warp-routing.sh"
+            exit 0
+            ;;
         update-node)
             run_script "${SCRIPT_DIR}/scripts/remnanode/update.sh"
             exit 0
@@ -223,6 +229,7 @@ handle_command() {
             echo "  install-nginx-node   - Install Nginx only"
             echo "  install-bbr          - Install BBR only"
             echo "  install-warp         - Install WARP only"
+            echo "  setup-warp-routing   - Route xray egress through existing WARP"
             echo "  update-node          - Update Remnanode"
             exit 1
             ;;
@@ -273,8 +280,9 @@ main() {
                         5) run_script "${SCRIPT_DIR}/scripts/remnanode/install-ipv6.sh" ;;
                         6) run_script "${SCRIPT_DIR}/scripts/remnanode/install-bbr.sh" ;;
                         7) run_script "${SCRIPT_DIR}/scripts/remnanode/install-warp.sh" ;;
-                        8) run_script "${SCRIPT_DIR}/scripts/remnanode/update.sh" ;;
-                        9) break ;;
+                        8) run_script "${SCRIPT_DIR}/scripts/remnanode/setup-warp-routing.sh" ;;
+                        9) run_script "${SCRIPT_DIR}/scripts/remnanode/update.sh" ;;
+                        10) break ;;
                         *) warn "$(get_string "invalid_choice")" ;;
                     esac
                 done

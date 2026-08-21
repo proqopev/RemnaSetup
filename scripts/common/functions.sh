@@ -365,6 +365,45 @@ EOF
     return 0
 }
 
+# Set up fwmark policy routing so that traffic marked by xray (sockopt mark=1)
+# egresses through the WARP interface, while the node's own traffic stays on the
+# main interface. Idempotent — safe to run on new or already-installed nodes.
+# The matching xray outbound in the panel must set:
+#   "streamSettings": { "sockopt": { "mark": 1 } }
+WARP_ROUTING_TABLE_DEFAULT="51820"
+ensure_warp_routing() {
+    local conf="/etc/wireguard/warp.conf"
+    local table="${WARP_ROUTING_TABLE:-$WARP_ROUTING_TABLE_DEFAULT}"
+
+    if [ ! -f "$conf" ]; then
+        error "$(get_string "warp_routing_no_conf")"
+        return 1
+    fi
+
+    # Persist across reboots: add PostUp/PostDown into the [Interface] section
+    # (must be above [Peer], otherwise wg-quick passes them to `wg` and fails).
+    if grep -q "table ${table}" "$conf"; then
+        info "$(get_string "warp_routing_already")"
+    else
+        sed -i "/^\[Interface\]/a PostUp = ip rule add fwmark 0x1 table ${table} || true\nPostUp = ip route add default dev warp table ${table} || true\nPostDown = ip rule del fwmark 0x1 table ${table} || true" "$conf"
+        info "$(get_string "warp_routing_added")"
+    fi
+
+    # Apply immediately for the running interface.
+    ip rule add fwmark 0x1 table "${table}" 2>/dev/null || true
+    if ip link show warp >/dev/null 2>&1; then
+        ip route replace default dev warp table "${table}"
+    fi
+
+    # Keep exactly one fwmark rule (drop duplicates from earlier manual runs).
+    while [ "$(ip rule show 2>/dev/null | grep -c "fwmark 0x1 lookup ${table}")" -gt 1 ]; do
+        ip rule del fwmark 0x1 table "${table}" 2>/dev/null || break
+    done
+
+    success "$(get_string "warp_routing_done")"
+    return 0
+}
+
 export -f info
 export -f warn
 export -f error
@@ -389,3 +428,4 @@ export -f deploy_random_site
 export -f ensure_caddy_cloudflare
 export -f set_caddy_cf_token
 export -f request_node_version
+export -f ensure_warp_routing

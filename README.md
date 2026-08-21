@@ -77,6 +77,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/youruser/RemnaSetup/refs/hea
 - **Случайный сайт-маскировка** из набора естественных шаблонов (кафе, консалтинг, фото, SaaS, книжный, студия, портфолио) — на каждой ноде свой, с уникальной микро-разметкой; настоящий 404 на случайные пути
 - **Фаервол ufw**: публичные `22,80,443`, порты управления `3001,61000` только для IP панели, `8443` закрыт наружу
 - **fail2ban** (jail `sshd`)
+- **WARP-egress для xray**: при установке WARP на ноде настраивается fwmark-маршрутизация (помеченный `mark=1` трафик уходит через Cloudflare, IP ноды не светится как выход). Для уже стоящих нод — команда `setup-warp-routing`. В панели нужно добавить outbound `{tag: warp, protocol: freedom, sockopt.mark: 1}` + правило маршрутизации и `dns.queryStrategy: UseIPv4`
 - Управление IPv6
 - WARP-NATIVE (by distillium)
 - BBR оптимизация
@@ -148,6 +149,7 @@ sudo -E bash /opt/remnasetup/remnasetup.sh install-node
 | `install-nginx-node` | Только Nginx |
 | `install-bbr` | Только BBR |
 | `install-warp` | Только WARP |
+| `setup-warp-routing` | Пустить egress xray через уже установленный WARP (для старых нод) |
 | `update-node` | Обновить Remnanode |
 
 ### Переменные окружения

@@ -267,6 +267,9 @@ install_warp_native() {
     success "$(get_string "warp_native_warp_connected")"
     echo ""
 
+    ensure_warp_routing
+    echo ""
+
     info "$(get_string "warp_native_check_status")"
 
     if ! wg show warp &>/dev/null; then
