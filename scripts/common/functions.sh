@@ -155,6 +155,21 @@ ensure_package() {
     install_packages "$install_name"
 }
 
+# Wait until apt/dpkg locks are released (e.g. unattended-upgrades running in the
+# background). Degrades gracefully if `fuser` is absent. Times out after 5 min.
+wait_for_apt() {
+    local waited=0
+    while fuser /var/lib/dpkg/lock-frontend /var/lib/dpkg/lock /var/lib/apt/lists/lock >/dev/null 2>&1; do
+        warn "$(get_string "apt_locked_waiting")"
+        sleep 3
+        waited=$((waited + 3))
+        if [ "$waited" -ge 300 ]; then
+            warn "apt still locked after 5 min — continuing anyway."
+            break
+        fi
+    done
+}
+
 is_non_interactive() {
     if [[ "$NON_INTERACTIVE" == "true" || "$NON_INTERACTIVE" == "1" ]]; then
         return 0
@@ -459,6 +474,7 @@ export -f update_package_list
 export -f install_packages
 export -f ensure_package
 export -f is_non_interactive
+export -f wait_for_apt
 export -f pause_press_key
 export -f derive_base_domain
 export -f deploy_random_site

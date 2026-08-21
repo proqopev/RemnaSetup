@@ -462,6 +462,7 @@ install_warp() {
     echo ""
 
     info "$(get_string "warp_native_install_wireguard")"
+    wait_for_apt
     apt-get update -y >/dev/null 2>&1 || apt-get update -y || {
         error "$(get_string "warp_native_update_failed")"
         exit 1
