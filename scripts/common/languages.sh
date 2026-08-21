@@ -381,6 +381,8 @@ LANG_STRINGS["en_import_cert_start"]="Importing pre-issued wildcard cert for Cad
 LANG_STRINGS["en_import_cert_no_caddy"]="Caddy is not installed. Install the node/Caddy first."
 LANG_STRINGS["en_import_cert_no_domain"]="Could not determine the domain. Set DOMAIN or BASE_DOMAIN."
 LANG_STRINGS["en_import_cert_verify"]="Certificate now served on :MONITOR_PORT (should be *.your-domain):"
+LANG_STRINGS["en_import_cert_enter_domain"]="Enter node domain (e.g. x7f2qk9z.example.com) — a fresh Caddyfile will be built"
+LANG_STRINGS["en_import_cert_building"]="Building a fresh Caddyfile for"
 LANG_STRINGS["en_caddy_use_ready_cert"]="Found ready certs in /root (wildcard.crt/key). Use them for Caddy (no ACME)? (y/n):"
 LANG_STRINGS["en_apt_locked_waiting"]="apt is locked (unattended-upgrades?), waiting..."
 
@@ -432,6 +434,8 @@ LANG_STRINGS["ru_import_cert_start"]="Импорт готового wildcard-с�
 LANG_STRINGS["ru_import_cert_no_caddy"]="Caddy не установлен. Сначала поставь ноду/Caddy."
 LANG_STRINGS["ru_import_cert_no_domain"]="Не удалось определить домен. Задай DOMAIN или BASE_DOMAIN."
 LANG_STRINGS["ru_import_cert_verify"]="Сертификат теперь отдаётся на :MONITOR_PORT (должно быть *.твой-домен):"
+LANG_STRINGS["ru_import_cert_enter_domain"]="Введите домен ноды (напр. x7f2qk9z.example.com) — создадим свежий Caddyfile"
+LANG_STRINGS["ru_import_cert_building"]="Создаю свежий Caddyfile для"
 LANG_STRINGS["ru_caddy_use_ready_cert"]="Найдены готовые серты в /root (wildcard.crt/key). Использовать их для Caddy (без ACME)? (y/n):"
 LANG_STRINGS["ru_apt_locked_waiting"]="apt заблокирован (unattended-upgrades?), жду..."
 
