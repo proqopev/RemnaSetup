@@ -462,14 +462,18 @@ install_warp() {
     echo ""
 
     info "$(get_string "warp_native_install_wireguard")"
-    apt-get update -qq &>/dev/null || {
+    apt-get update -y >/dev/null 2>&1 || apt-get update -y || {
         error "$(get_string "warp_native_update_failed")"
         exit 1
     }
-    apt-get install -y wireguard &>/dev/null || {
-        error "$(get_string "warp_native_wireguard_failed")"
-        exit 1
-    }
+    # Modern kernels have WireGuard built-in — wireguard-tools is enough and avoids
+    # the DKMS module build that fails on many VPS. Fall back to the metapackage.
+    if ! apt-get install -y wireguard-tools >/dev/null 2>&1; then
+        if ! apt-get install -y wireguard; then
+            error "$(get_string "warp_native_wireguard_failed")"
+            exit 1
+        fi
+    fi
     success "$(get_string "warp_native_wireguard_ok")"
     echo ""
 
