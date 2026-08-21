@@ -123,6 +123,21 @@ bash <(curl -fsSL https://raw.githubusercontent.com/proqopev/RemnaSetup/refs/hea
 
 ## 4. Перевод старой ноды на новую схему
 
+**Проще всего — пункт меню `10. Миграция` (или команда `migrate`).** Один заход переводит ноду
+с изначальной установки (capybara) на новую схему: ставит **сайт-маскировку**, настраивает
+**Caddy wildcard** (серты из `/root` без ACME, а если их нет — выпустит через Cloudflare, спросит токен)
+и поднимает **WARP-egress** (ставит WARP если нет, или добавляет маршрутизацию). В конце — напоминание
+по профилю. Перед запуском не забудь A-запись нового имени (DNS only) и, при желании, `wildcard.crt/key` в `/root`.
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/proqopev/RemnaSetup/refs/heads/main/install.sh) migrate
+```
+
+Дальше в панели: `serverNames` (новое имя), `target: 127.0.0.1:8443`, WARP-outbound, и переимпорт подписок.
+
+<details>
+<summary>Или вручную по шагам</summary>
+
 1. Cloudflare: A-запись нового случайного имени → IP ноды (**DNS only**).
 2. WinSCP: `wildcard.crt` + `wildcard.key` в `/root/`.
 3. Серт без ACME:
@@ -135,6 +150,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/proqopev/RemnaSetup/refs/hea
    ```
 5. Панель: обнови `serverNames` (новое имя), проверь `target: 127.0.0.1:8443`, добавь WARP-outbound.
 6. Переимпортируй подписки.
+</details>
 
 ---
 
