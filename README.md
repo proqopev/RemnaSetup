@@ -84,6 +84,80 @@ bash <(curl -fsSL https://raw.githubusercontent.com/proqopev/RemnaSetup/refs/hea
 
 ---
 
+## Подготовка: домен на Cloudflare (wildcard-сертификат)
+
+Чтобы Caddy получал один **wildcard**-сертификат `*.example.com` вместо отдельного
+на каждое имя ноды (иначе все имена нод светятся в публичных CT-логах и находятся
+одним запросом к `crt.sh`), домен нужно держать на Cloudflare, а выпуск вести через
+ACME **DNS-01**.
+
+1. **Добавить домен в Cloudflare** → Dashboard → *Add a Site* → ваш домен → тариф **Free**.
+   Cloudflare подтянет текущие DNS-записи — проверьте, что A-записи нод на месте.
+2. **Сменить NS у регистратора** — Cloudflare выдаст два NS-сервера; впишите их в панели
+   регистратора вместо текущих. Распространение — от 10 минут до нескольких часов.
+   Проверка: `dig NS example.com` показывает NS Cloudflare.
+3. ⚠️ **A-записи нод — только `DNS only` (серая тучка).** Оранжевая тучка (Proxied) ломает
+   Reality: клиент должен видеть реальный IP вашего сервера в TLS-хендшейке, а не IP Cloudflare.
+4. **Создать API-токен** → иконка профиля → *My Profile* → *API Tokens* → *Create Custom Token*:
+   - **Permissions:** `Zone → DNS → Edit`
+   - **Zone Resources:** `Include → Specific zone → example.com`
+   - Скопировать токен (показывается один раз) — это `CF_API_TOKEN` для скрипта.
+
+Дальше при установке Caddy скрипт сам соберёт Caddy с плагином `caddy-dns/cloudflare`,
+положит токен в systemd-override и выпустит `*.example.com` через DNS-01. Имя ноды —
+случайная строка (напр. `x7f2qk9z.example.com`), но в CT-логах будет только `*.example.com`.
+
+---
+
+## Настройка Reality-профиля в Remnawave
+
+Серверную часть (Caddy/self-steal, сертификат, WARP на хосте) ставит скрипт, а вот
+**xray-конфиг в панели правится вручную**. Минимально нужно следующее.
+
+### 1. Reality-инбаунд (self-steal)
+- `target` (он же `dest`) → **`127.0.0.1:8443`** — Reality форвардит «незваных» на локальный
+  Caddy (порт = ваш `MONITOR_PORT`). Просто `"8443"` без хоста — не надёжно.
+- `serverNames` → полное имя ноды (напр. `x7f2qk9z.example.com`), **не** wildcard.
+- `xver` → `0` для Caddy (для Nginx с proxy protocol — `1`).
+
+### 2. WARP-egress (чтобы IP ноды не светился как выход)
+Маршрутизацию на хосте ставит скрипт (`install-warp` или `setup-warp-routing`). В панели
+в xray-конфиг добавить три вещи:
+
+**DNS — только IPv4** (WARP настроен IPv4-only):
+```json
+"dns": { "servers": ["https://1.1.1.1/dns-query"], "queryStrategy": "UseIPv4" }
+```
+
+**Outbound `warp`** (метка `mark=1` совпадает с fwmark-правилом на хосте):
+```json
+{
+  "tag": "warp",
+  "protocol": "freedom",
+  "settings": { "domainStrategy": "ForceIPv4" },
+  "streamSettings": { "sockopt": { "mark": 1 } }
+}
+```
+
+**Routing** — блок-правила сверху, «ловушку» в warp последней (весь трафик через Cloudflare):
+```json
+"rules": [
+  { "type": "field", "ip": ["geoip:private"], "outboundTag": "BLOCK" },
+  { "type": "field", "domain": ["geosite:private"], "outboundTag": "BLOCK" },
+  { "type": "field", "protocol": ["bittorrent"], "outboundTag": "BLOCK" },
+  { "type": "field", "network": "tcp,udp", "outboundTag": "warp" }
+]
+```
+
+Проверка с клиента: `https://www.cloudflare.com/cdn-cgi/trace` → `warp=on` и IP из Cloudflare
+(а не IP ноды).
+
+> ⚠️ Не применяйте профиль с `outboundTag: warp` на ноду, где host-маршрутизация WARP
+> не настроена (`setup-warp-routing`) — иначе помеченный трафик уходить будет некуда и
+> пользователи этой ноды окажутся офлайн.
+
+---
+
 ## Non-interactive режим
 
 Можно передать параметры через переменные окружения и команду — скрипт выполнится без вопросов.
