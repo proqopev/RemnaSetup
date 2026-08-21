@@ -10,7 +10,7 @@
 
 Скрипт для установки и управления инфраструктурой **Remnawave** и **Remnanode**
 
-[![Stars](https://img.shields.io/github/stars/Capybara-z/RemnaSetup?style=social)](https://github.com/Capybara-z/RemnaSetup)
+[![Stars](https://img.shields.io/github/stars/proqopev/RemnaSetup?style=social)](https://github.com/proqopev/RemnaSetup)
 
 </div>
 
@@ -19,19 +19,19 @@
 ## Установка
 
 ```bash
-bash <(curl -fsSL raw.githubusercontent.com/Capybara-z/RemnaSetup/refs/heads/main/install.sh)
+bash <(curl -fsSL raw.githubusercontent.com/proqopev/RemnaSetup/refs/heads/main/install.sh)
 ```
 
 или
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/Capybara-z/RemnaSetup/refs/heads/main/install.sh -o install.sh && chmod +x install.sh && sudo bash ./install.sh
+curl -fsSL https://raw.githubusercontent.com/proqopev/RemnaSetup/refs/heads/main/install.sh -o install.sh && chmod +x install.sh && sudo bash ./install.sh
 ```
 
 ### Установка из своего форка
 
-Если вы используете собственную копию репозитория (со своими шаблонами-маскировками
-и настройками), укажите её через `REMNASETUP_REPO` — `install.sh` скачает именно её:
+Если используете собственную копию репозитория, укажите её через `REMNASETUP_REPO` —
+`install.sh` скачает именно её:
 
 ```bash
 REMNASETUP_REPO=youruser/RemnaSetup \
@@ -40,18 +40,17 @@ bash <(curl -fsSL https://raw.githubusercontent.com/youruser/RemnaSetup/refs/hea
 
 ### Установка ноды «всё сразу» одной командой
 
-Полностью неинтерактивно, из своего форка, с Caddy + Cloudflare wildcard:
+Полностью неинтерактивно, с Caddy + Cloudflare wildcard:
 
 ```bash
-REMNASETUP_REPO=youruser/RemnaSetup \
 NON_INTERACTIVE=true \
-DOMAIN=abc123.datahubfiles.com \
+DOMAIN=node1.example.com \
 CF_API_TOKEN='cloudflare_api_token' \
 ACME_EMAIL='you@example.com' \
 NODE_PORT=3001 SECRET_KEY='ключ_из_панели' \
 WEBSERVER=caddy INSTALL_WARP=y BBR_ANSWER=y \
 PANEL_IP=1.2.3.4 \
-bash <(curl -fsSL https://raw.githubusercontent.com/youruser/RemnaSetup/refs/heads/main/install.sh) install-node
+bash <(curl -fsSL https://raw.githubusercontent.com/proqopev/RemnaSetup/refs/heads/main/install.sh) install-node
 ```
 
 `PANEL_IP` включает правила ufw, открывающие порты управления `3001,61000`
@@ -71,6 +70,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/youruser/RemnaSetup/refs/hea
 
 ### Remnanode (нода)
 - Полная установка (Remnanode + Caddy/Nginx + BBR + WARP)
+- Выбор версии образа ноды (`latest` или `X.Y.Z`) — важно для совместимости с версией панели
 - Веб-сервер на выбор: **Caddy** или **Nginx** с self-steal
 - **Caddy**: wildcard-сертификат `*.домен` через Cloudflare DNS-01 (плагин `caddy-dns/cloudflare` вкомпилирован автоматически) — в CT-логах виден только wildcard, отдельные имена нод не светятся
 - Nginx: поддержка proxy protocol, сертификаты через Cloudflare DNS-01 / HTTP-01 / Gcore DNS-01
@@ -91,7 +91,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/youruser/RemnaSetup/refs/hea
 ### Полная установка ноды с Caddy (Cloudflare DNS-01 wildcard)
 
 ```bash
-DOMAIN=abc123.datahubfiles.com \
+DOMAIN=node1.example.com \
 MONITOR_PORT=8443 \
 NODE_PORT=3001 \
 SECRET_KEY='ваш_ключ' \
@@ -103,8 +103,8 @@ BBR_ANSWER=y \
 sudo -E bash /opt/remnasetup/remnasetup.sh install-node
 ```
 
-> `DOMAIN` — полное имя ноды (`abc123.datahubfiles.com`); wildcard-сертификат
-> выпускается на базовую зону (`*.datahubfiles.com`), извлекаемую автоматически.
+> `DOMAIN` — полное имя ноды (`node1.example.com`); wildcard-сертификат
+> выпускается на базовую зону (`*.example.com`), извлекаемую автоматически.
 > `CF_API_TOKEN` — токен Cloudflare с правами **Zone → DNS → Edit** на вашу зону.
 > `ACME_EMAIL` — необязателен. Токен хранится в systemd-override Caddy, а не в Caddyfile.
 > Опционально `SITE_TEMPLATE=cafe|consulting|photography|saas|bookshop|studio|devportfolio`
@@ -113,7 +113,7 @@ sudo -E bash /opt/remnasetup/remnasetup.sh install-node
 ### Полная установка ноды с Nginx
 
 ```bash
-DOMAIN=node.example.com \
+DOMAIN=node1.example.com \
 MONITOR_PORT=8443 \
 NODE_PORT=3001 \
 SECRET_KEY='ваш_ключ' \
@@ -130,7 +130,7 @@ sudo -E bash /opt/remnasetup/remnasetup.sh install-node
 ### Пропуск компонентов
 
 ```bash
-DOMAIN=node.example.com \
+DOMAIN=node1.example.com \
 WEBSERVER=caddy \
 MONITOR_PORT=8443 \
 SKIP_REMNANODE=true \
@@ -224,11 +224,12 @@ sudo -E bash /opt/remnasetup/remnasetup.sh install-node
 
 ## Контакты
 
-Telegram: [@KaTTuBaRa](https://t.me/KaTTuBaRa)
+GitHub: [@proqopev](https://github.com/proqopev)
 
-## Поддержка проекта
+## Благодарности
 
-Сделано при поддержке [SoloBot](https://github.com/Vladless/Solo_bot) ([@solonet_sup](https://t.me/solonet_sup))
+Форк проекта [Capybara-z/RemnaSetup](https://github.com/Capybara-z/RemnaSetup).
+WARP-NATIVE — by distillium. Сделано при поддержке [SoloBot](https://github.com/Vladless/Solo_bot).
 
 ## Лицензия
 
