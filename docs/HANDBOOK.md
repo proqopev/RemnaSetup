@@ -342,6 +342,60 @@ network:
 { "type":"field", "network":"tcp,udp", "outboundTag":"warp" }     // было
 { "type":"field", "network":"tcp,udp", "outboundTag":"DIRECT" }   // стало
 ```
+
+> ⚠️ **`outboundTag` = ИМЯ (`tag`) outbound-а (`DIRECT`), а НЕ IP.** IP выхода пишется **только**
+> в `sendThrough` внутри самого outbound-а. Не вставляй IP в `outboundTag` — routing будет
+> ссылаться на несуществующий блок.
+
+**Полный профиль (dual-IP, выход через расходный IP)** — заглушки замени на свои:
+
+```json
+{
+  "log": { "loglevel": "none" },
+  "dns": { "servers": ["https://1.1.1.1/dns-query"], "queryStrategy": "UseIPv4" },
+  "inbounds": [
+    {
+      "tag": "vless-reality",
+      "port": 443,
+      "protocol": "vless",
+      "settings": { "clients": [], "decryption": "none" },
+      "sniffing": { "enabled": true, "destOverride": ["http", "tls", "quic"] },
+      "streamSettings": {
+        "network": "raw",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "xver": 0,
+          "target": "127.0.0.1:8443",
+          "spiderX": "/",
+          "shortIds": ["<short-id-из-панели>"],
+          "privateKey": "<приватный-ключ-из-панели>",
+          "fingerprint": "firefox",
+          "serverNames": ["x7f2qk9z.example.com"]
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    { "tag": "DIRECT", "protocol": "freedom", "sendThrough": "198.51.100.20" },
+    { "tag": "BLOCK", "protocol": "blackhole" }
+  ],
+  "routing": {
+    "rules": [
+      { "type": "field", "ip": ["geoip:private"], "outboundTag": "BLOCK" },
+      { "type": "field", "domain": ["geosite:private"], "outboundTag": "BLOCK" },
+      { "type": "field", "protocol": ["bittorrent"], "outboundTag": "BLOCK" },
+      { "type": "field", "network": "tcp,udp", "outboundTag": "DIRECT" }
+    ]
+  }
+}
+```
+
+Что подставить:
+- `198.51.100.20` — **расходный** (выходной) IP ноды (тот, что НЕ в панели);
+- `x7f2qk9z.example.com` — имя ноды (вход; в Cloudflare A-запись этого имени → **чистый** IP, DNS only);
+- `<приватный-ключ>` / `<short-id>` — из карточки ноды в панели;
+- `warp`-outbound здесь **не нужен** (мы на два-IP). Для single-IP нод — наоборот, оставляй WARP-вариант из [раздела 5](#5-настройка-профиля-в-remnawave).
 WARP-outbound можно оставить (метка станет неактивной) или убрать. Reality слушает `0.0.0.0:443`,
 приём на чистом IP работает без изменений.
 
