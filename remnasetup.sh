@@ -114,8 +114,9 @@ display_remnanode_menu() {
         echo -e "${BLUE}8. Route xray egress through WARP (existing WARP)${RESET}"
         echo -e "${BLUE}9. Use pre-issued wildcard cert (no ACME)${RESET}"
         echo -e "${BLUE}10. Migrate old node to the new scheme (site + wildcard + WARP)${RESET}"
-        echo -e "${BLUE}11. Update Remnanode${RESET}"
-        echo -e "${BLUE}12. Back${RESET}"
+        echo -e "${BLUE}11. Disable WARP egress (dual-IP nodes)${RESET}"
+        echo -e "${BLUE}12. Update Remnanode${RESET}"
+        echo -e "${BLUE}13. Back${RESET}"
     else
         echo -e "${BLUE}1. Полная установка (Remnanode + Caddy/Nginx + BBR + WARP-NATIVE (by distillium))${RESET}"
         echo -e "${BLUE}2. Только Remnanode${RESET}"
@@ -127,8 +128,9 @@ display_remnanode_menu() {
         echo -e "${BLUE}8. Пустить egress xray через WARP (WARP уже установлен)${RESET}"
         echo -e "${BLUE}9. Использовать готовый wildcard-серт (без ACME)${RESET}"
         echo -e "${BLUE}10. Миграция старой ноды на новую схему (маскировка + wildcard + WARP)${RESET}"
-        echo -e "${BLUE}11. Обновить Remnanode${RESET}"
-        echo -e "${BLUE}12. Назад${RESET}"
+        echo -e "${BLUE}11. Отключить WARP-egress (для dual-IP нод)${RESET}"
+        echo -e "${BLUE}12. Обновить Remnanode${RESET}"
+        echo -e "${BLUE}13. Назад${RESET}"
     fi
     echo
     read -p "$(echo -e "${BOLD_CYAN}$(get_string "select_option"):${RESET}") " REMNANODE_OPTION
@@ -229,6 +231,10 @@ handle_command() {
             run_script "${SCRIPT_DIR}/scripts/remnanode/migrate.sh"
             exit 0
             ;;
+        disable-warp)
+            run_script "${SCRIPT_DIR}/scripts/remnanode/disable-warp.sh"
+            exit 0
+            ;;
         update-node)
             run_script "${SCRIPT_DIR}/scripts/remnanode/update.sh"
             exit 0
@@ -246,6 +252,7 @@ handle_command() {
             echo "  setup-warp-routing   - Route xray egress through existing WARP"
             echo "  import-cert          - Use a pre-issued wildcard cert (no ACME)"
             echo "  migrate              - Migrate an old (capybara) node to the new scheme"
+            echo "  disable-warp         - Disable WARP egress (e.g. dual-IP nodes)"
             echo "  update-node          - Update Remnanode"
             exit 1
             ;;
@@ -299,8 +306,9 @@ main() {
                         8) run_script "${SCRIPT_DIR}/scripts/remnanode/setup-warp-routing.sh" ;;
                         9) run_script "${SCRIPT_DIR}/scripts/remnanode/import-cert.sh" ;;
                         10) run_script "${SCRIPT_DIR}/scripts/remnanode/migrate.sh" ;;
-                        11) run_script "${SCRIPT_DIR}/scripts/remnanode/update.sh" ;;
-                        12) break ;;
+                        11) run_script "${SCRIPT_DIR}/scripts/remnanode/disable-warp.sh" ;;
+                        12) run_script "${SCRIPT_DIR}/scripts/remnanode/update.sh" ;;
+                        13) break ;;
                         *) warn "$(get_string "invalid_choice")" ;;
                     esac
                 done
