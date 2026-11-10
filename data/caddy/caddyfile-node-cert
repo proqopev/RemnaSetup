@@ -1,5 +1,22 @@
+{
+	servers {
+		# Отключаем HTTP/3: иначе Caddy добавляет заголовок
+		#   alt-svc: h3=":8443"; ma=2592000
+		# и любой зонд видит внутренний порт монитора — палево.
+		protocols h1 h2
+	}
+}
+
 *.$BASE_DOMAIN:$MONITOR_PORT {
+	# Слушаем только локально: снаружи 8443 не должен отвечать вообще.
+	bind 127.0.0.1
+
 	tls $CERT_CRT $CERT_KEY
+
+	# Убираем "server: Caddy" — иначе видно, что это reverse-proxy, а не сайт.
+	header {
+		-Server
+	}
 
 	@local {
 		remote_ip 127.0.0.1 ::1

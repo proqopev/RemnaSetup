@@ -1,11 +1,26 @@
 {
 	email $ACME_EMAIL
 	acme_dns cloudflare {env.CF_API_TOKEN}
+	servers {
+		# Отключаем HTTP/3: иначе Caddy добавляет заголовок
+		#   alt-svc: h3=":8443"; ma=2592000
+		# и любой зонд видит внутренний порт монитора — палево.
+		protocols h1 h2
+	}
 }
 
 *.$BASE_DOMAIN:$MONITOR_PORT {
+	# Слушаем только локально: снаружи 8443 не должен отвечать вообще.
+	# Reality ходит на 127.0.0.1:$MONITOR_PORT, ему этого достаточно.
+	bind 127.0.0.1
+
 	tls {
 		dns cloudflare {env.CF_API_TOKEN}
+	}
+
+	# Убираем "server: Caddy" — иначе видно, что это reverse-proxy, а не сайт.
+	header {
+		-Server
 	}
 
 	@local {
