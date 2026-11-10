@@ -242,6 +242,22 @@ deploy_random_site() {
     rm -rf "${target:?}/"* 2>/dev/null || true
     cp -r "$sites_dir/$pick/." "$target/"
 
+    # canonical / og:url / sitemap.xml несут адрес сайта. Подставляем реальный
+    # домен ноды: ссылка на несуществующий домен в canonical — сама по себе
+    # признак подделки, настоящие сайты так не делают.
+    local origin="${DOMAIN:-}"
+    if [[ -n "$origin" ]]; then
+        origin="https://$origin"
+        grep -rl '__SITE_ORIGIN__' "$target" 2>/dev/null | while read -r f; do
+            sed -i "s|__SITE_ORIGIN__|$origin|g" "$f"
+        done
+    else
+        # домена нет — лучше убрать канонические ссылки, чем оставить битые
+        sed -i '/rel="canonical"/d' "$target/index.html" 2>/dev/null || true
+        sed -i '/property="og:url"/d' "$target/index.html" 2>/dev/null || true
+        sed -i '/^Sitemap:/d' "$target/robots.txt" 2>/dev/null || true
+    fi
+
     local rid rcomment rclass rmeta
     rid=$(openssl rand -hex 16)
     rcomment=$(openssl rand -hex 12)
