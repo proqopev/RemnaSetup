@@ -11,7 +11,7 @@
 <meta property="og:title" content="Ledgerly — Simple invoicing for freelancers">
 <meta property="og:description" content="Send invoices, track expenses, and get paid faster.">
 <meta name="theme-color" content="#4f46e5">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%234f46e5%22/><path d=%22M30 65 L50 30 L70 65 Z%22 fill=%22%23fff%22/></svg>">
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20100%20100%22%3E%3Crect%20width%3D%22100%22%20height%3D%22100%22%20rx%3D%2220%22%20fill%3D%22%231e1b4b%22%2F%3E%3Ctext%20x%3D%2250%22%20y%3D%2268%22%20font-size%3D%2254%22%20font-family%3D%22Arial%2CHelvetica%2Csans-serif%22%20font-weight%3D%22700%22%20fill%3D%22%23a5b4fc%22%20text-anchor%3D%22middle%22%3E%D0%A1%3C%2Ftext%3E%3C%2Fsvg%3E"><rect width=%22100%22 height=%22100%22 rx=%2224%22 fill=%22%234f46e5%22/><path d=%22M30 65 L50 30 L70 65 Z%22 fill=%22%23fff%22/></svg>">
 <style>
   :root { --ink:#1e1b2e; --accent:#4f46e5; --accent2:#22d3ee; --bg:#faf9ff; --muted:#6b7280; }
   * { box-sizing: border-box; }
@@ -50,29 +50,92 @@
   .feature p { color: var(--muted); font-size: 0.92rem; margin:0; }
   footer { text-align:center; padding: 30px; color:#9997a8; font-size:0.85rem; border-top:1px solid #ececf5; }
   @media (max-width:700px) { .features{grid-template-columns:1fr;} nav{display:none;} .hero h1{font-size:2rem;} }
+  /* Refined visual system — made for real content, not a wireframe. */
+  :root { --page-width:1120px; --soft-shadow:0 24px 64px rgba(20,28,25,.09); }
+  html { scroll-behavior:smooth; scroll-padding-top:24px; }
+  body { font-family: Inter, 'Segoe UI', -apple-system, BlinkMacSystemFont, Arial, sans-serif; line-height:1.65; letter-spacing:-.01em; }
+  header { position:relative; z-index:2; padding:18px max(6vw, calc((100vw - var(--page-width))/2)); }
+  nav a { display:inline-block; padding:8px 0; transition:color .2s ease, opacity .2s ease; }
+  nav a:focus-visible, a:focus-visible { outline:3px solid currentColor; outline-offset:4px; border-radius:3px; }
+  .hero { position:relative; isolation:isolate; }
+  .hero h1 { font-size:clamp(2.5rem, 6vw, 5.25rem); line-height:1.04; letter-spacing:-.055em; text-wrap:balance; }
+  .hero p { line-height:1.75; max-width:620px; margin-left:auto; margin-right:auto; }
+  .hero .cta, .hero .book-btn, .hero .btn-primary, .hero .links a.primary { transition:transform .2s ease, box-shadow .2s ease, filter .2s ease; }
+  .hero .cta:hover, .hero .book-btn:hover, .hero .btn-primary:hover, .hero .links a.primary:hover { transform:translateY(-2px); box-shadow:0 12px 26px rgba(24,33,28,.16); }
+  .services, .features, .grid { gap:18px; }
+  .service, .feature, .proj, .mockup .card { border-radius:20px; }
+  .service { padding:24px; background:#fff; border:1px solid rgba(27,42,74,.08); border-top:3px solid var(--gold); box-shadow:0 12px 30px rgba(27,42,74,.05); }
+  .feature { padding:23px; border:1px solid #e9e8f2; background:#fff; border-radius:16px; }
+  .feature h3:before { content:'✳'; color:var(--accent); margin-right:9px; }
+  .proj { transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease; }
+  .proj:hover { transform:translateY(-4px); border-color:var(--accent); box-shadow:0 18px 40px rgba(0,0,0,.16); }
+  .grid div { border-radius:8px; position:relative; overflow:hidden; }
+  .grid div:after { content:''; position:absolute; inset:0; background:linear-gradient(150deg,rgba(255,255,255,.12),transparent 45%,rgba(0,0,0,.24)); }
+  .menu, .events, .schedule { width:min(100% - 40px, 820px); }
+  .menu-item, .event, .cls { padding:18px 16px; transition:background .18s ease; }
+  .menu-item:hover, .event:hover, .cls:hover { background:rgba(255,255,255,.55); }
+  footer { line-height:1.9; }
+  @media (prefers-reduced-motion:reduce) { *, *::before, *::after { scroll-behavior:auto !important; transition:none !important; } }
+  @media (max-width:700px) {
+    header { padding:16px 5vw; }
+    .hero { padding-top:54px; padding-bottom:38px; }
+    .hero h1 { font-size:clamp(2.45rem, 11vw, 3.8rem); }
+    .services, .features { padding-left:5vw; padding-right:5vw; }
+    .menu, .events, .schedule { width:calc(100% - 32px); }
+    .menu-item, .event, .cls { padding-left:10px; padding-right:10px; }
+  }
+  .pricing-note{max-width:760px;margin:0 auto 64px;padding:28px;text-align:center;background:#fff;border:1px solid #ececf5;border-radius:18px}.pricing-note h2{font-size:1.7rem}.pricing-note p{color:var(--muted)}
+  /* Utilities for complete, accessible self-service flows. */
+  .interactive{max-width:850px;width:calc(100% - 36px);margin:64px auto;padding:clamp(22px,5vw,42px);background:rgba(255,255,255,.78);border:1px solid rgba(30,40,32,.12);border-radius:22px;box-shadow:0 22px 60px rgba(20,28,25,.07)}
+  .interactive h2{font-size:clamp(1.6rem,4vw,2.4rem);margin:0 0 8px;letter-spacing:-.035em}
+  .interactive>p{color:var(--muted,#77786f);margin-top:0}
+  .form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:24px}
+  .field{display:grid;gap:7px;font-size:.88rem;font-weight:600}
+  .field input,.field select,.field textarea,.search-input{width:100%;font:inherit;color:inherit;background:#fff;border:1px solid rgba(40,50,45,.2);border-radius:11px;padding:12px 14px;min-height:48px}
+  .field textarea{min-height:110px;resize:vertical}
+  .field input:focus,.field select:focus,.field textarea:focus,.search-input:focus{outline:3px solid rgba(88,117,98,.2);border-color:#66806f}
+  .form-actions{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:20px}
+  .action-button{font:inherit;font-weight:700;border:0;border-radius:10px;padding:13px 20px;background:var(--ink,#2b4a3f);color:white;cursor:pointer}
+  .action-button:hover{filter:brightness(1.12);transform:translateY(-1px)}
+  .form-status{margin-top:18px;padding:16px;border-radius:12px;background:#edf5ed;color:#23462c;line-height:1.6}
+  .form-status a{color:inherit;font-weight:700}
+  .book-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px}
+  .book-tools .search-input{flex:1;min-width:190px}
+  .book-tools select{font:inherit;padding:12px;border-radius:10px;border:1px solid rgba(40,50,45,.2);background:white}
+  .book-card{padding:18px 0;border-bottom:1px solid rgba(40,50,45,.14);display:flex;justify-content:space-between;gap:20px}
+  .book-card small{display:block;color:var(--muted,#77786f);margin-top:4px}
+  .book-card button{border:1px solid currentColor;background:transparent;color:inherit;padding:8px 12px;border-radius:9px;cursor:pointer;white-space:nowrap}
+  .slot-button{border:1px solid rgba(40,50,45,.18);background:white;color:inherit;padding:13px 16px;border-radius:12px;cursor:pointer;text-align:left}
+  .slot-button[aria-pressed="true"]{border-color:#52745c;box-shadow:0 0 0 2px #52745c inset;background:#edf5ed}
+  .room-select{display:grid;gap:12px;margin-top:22px}
+  .room-option{display:flex;align-items:flex-start;gap:12px;padding:16px;border:1px solid rgba(40,50,45,.16);border-radius:13px;background:#fff}
+  .room-option:has(input:checked){border-color:#52745c;box-shadow:0 0 0 1px #52745c}
+  .room-option input{margin-top:5px;accent-color:#52745c}
+  .muted-copy{font-size:.83rem;color:var(--muted,#77786f);font-weight:400}
+  @media(max-width:600px){.form-grid{grid-template-columns:1fr}.interactive{margin:42px auto}.book-card{align-items:flex-start}.book-card button{padding:8px}}
 </style>
 </head>
 <body>
 <header>
   <div class="logo">Счёт<span>Про</span></div>
   <nav>
-    <a href="#features">Возможности</a>
+    <a href="#features">Возможности</a><a href="#invoice-demo">Создать счёт</a>
     <a href="#pricing">Тарифы</a>
     <a href="#docs">Справка</a>
   </nav>
-  <a class="signup-btn" href="#signup">Начать бесплатно</a>
+  <a class="signup-btn" href="#invoice-demo">Создать счёт</a>
 </header>
 
 <section class="hero">
   <h1>Счета, которые <span class="hl">не мешают работать</span></h1>
   <p>Выставляйте счета, ведите расходы и получайте деньги быстрее. Сделано для фрилансеров, которым важнее сама работа.</p>
   <div class="hero-actions">
-    <a class="btn-primary" href="#signup">Попробовать бесплатно</a>
+    <a class="btn-primary" href="#invoice-demo">Создать счёт</a>
     <a class="btn-secondary" href="#docs">Открыть справку →</a>
   </div>
 </section>
 
-<section class="mockup">
+<section class="mockup" id="docs">
   <div class="card">
     <div class="row"><span>Счёт №0192 — Студия Девять</span><span>94 200 ₽</span></div>
     <div class="row"><span>Счёт №0191 — Кольт и Рэй</span><span>61 500 ₽</span></div>
@@ -95,8 +158,19 @@
   </div>
 </section>
 
-<footer id="signup">
-  &copy; 2026 ООО «СчётПро» &middot; support@schetpro.ru &middot; <a href="#terms" style="color:inherit">Условия</a> &middot; <a href="#privacy" style="color:inherit">Конфиденциальность</a>
+<section class="pricing-note" id="pricing"><h2>Один план — всё необходимое</h2><p>Бесплатный демо-режим поможет собрать первый счёт. Данные сохраняются только на вашем устройстве.</p></section><section class="interactive" id="invoice-demo"><h2>Соберите счёт за минуту</h2><p>Заполните реквизиты проекта и получите готовый к печати счёт. Данные остаются в этом браузере.</p><form id="invoice-form"><div class="form-grid"><label class="field">Вы<input name="seller" required placeholder="Ваше имя или ИП"></label><label class="field">Клиент<input name="client" required placeholder="Название компании"></label><label class="field">Услуга<input name="service" required placeholder="Например, дизайн сайта"></label><label class="field">Сумма, ₽<input name="amount" type="number" min="1" step="1" required placeholder="45000"></label><label class="field">Срок оплаты<input name="due" type="date" required></label></div><div class="form-actions"><button class="action-button">Сформировать счёт</button><span class="muted-copy">Демо не принимает и не отправляет платежи.</span></div></form><div id="invoice-preview" class="form-status" hidden aria-live="polite"></div></section><section class="interactive" id="subscribe-form"><h2>Получать полезные заметки</h2><p>Без спама: только короткие советы по счетам и работе с оплатами.</p><form id="newsletter-form"><div class="form-grid"><label class="field">Email<input name="email" type="email" required autocomplete="email" placeholder="name@example.com"></label></div><div class="form-actions"><button class="action-button">Подписаться локально</button><span class="muted-copy">Демонстрационный список хранится в браузере.</span></div><div class="form-status" hidden aria-live="polite"></div></form></section><footer id="signup">
+  <span id="terms"></span><span id="privacy"></span>&copy; 2026 ООО «СчётПро» &middot; support@schetpro.ru &middot; <a href="#terms" style="color:inherit">Условия</a> &middot; <a href="#privacy" style="color:inherit">Конфиденциальность</a>
 </footer>
+<script>
+function safeMailValue(s){return encodeURIComponent(s)}
+function readForm(f){return Object.fromEntries(new FormData(f).entries())}
+function encodeBody(obj){return Object.entries(obj).map(([k,v])=>`${k}: ${v}`).join('\n')}
+function showStatus(box,html){box.innerHTML=html;box.hidden=false;box.focus?.()}
+function mailRequest(form){form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;const data=readForm(form);const email=form.dataset.email;const kind=form.dataset.kind;const subject=`Запрос с сайта: ${kind}`;const body=encodeBody(data);const status=form.querySelector('.form-status');const href=`mailto:${email}?subject=${safeMailValue(subject)}&body=${safeMailValue(body)}`;showStatus(status,`Запрос подготовлен. Для отправки откройте почтовое приложение: <a href="${href}">написать ${email}</a>. До подтверждения сотрудником запись не оформлена.`)})}
+document.querySelectorAll('form[data-kind]').forEach(mailRequest);
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const inv=document.querySelector('#invoice-form');if(inv){const due=inv.elements.due;const d=new Date();d.setDate(d.getDate()+14);d.setMinutes(d.getMinutes()-d.getTimezoneOffset());due.value=d.toISOString().slice(0,10);inv.addEventListener('submit',e=>{e.preventDefault();if(!inv.reportValidity())return;const x=readForm(inv);const id=`СП-${new Date().getFullYear()}-${String(Date.now()).slice(-5)}`;const amount=Number(x.amount).toLocaleString('ru-RU');const preview=document.querySelector('#invoice-preview');preview.innerHTML=`<h3>Счёт №${id}</h3><p>От: <b>${escapeHtml(x.seller)}</b><br>Кому: <b>${escapeHtml(x.client)}</b></p><p>Услуга: ${escapeHtml(x.service)}<br>К оплате: <b>${amount} ₽</b><br>Оплатить до: ${escapeHtml(x.due)}</p><div class="form-actions"><button type="button" class="action-button" id="print-invoice">Распечатать / сохранить PDF</button><button type="button" id="copy-invoice" class="slot-button">Скопировать реквизиты</button></div><p class="muted-copy">Демо-счёт не является бухгалтерским документом.</p>`;preview.hidden=false;document.querySelector('#print-invoice').onclick=()=>window.print();document.querySelector('#copy-invoice').onclick=async()=>{const text=`Счёт №${id}\nОт: ${x.seller}\nКому: ${x.client}\nУслуга: ${x.service}\nСумма: ${amount} ₽\nОплатить до: ${x.due}`;try{await navigator.clipboard.writeText(text);document.querySelector('#copy-invoice').textContent='Скопировано'}catch{document.querySelector('#copy-invoice').textContent='Копирование недоступно'}}})}
+const newsletter=document.querySelector('#newsletter-form');if(newsletter){newsletter.addEventListener('submit',e=>{e.preventDefault();if(!newsletter.reportValidity())return;const email=new FormData(newsletter).get('email');const box=newsletter.querySelector('.form-status');try{const list=JSON.parse(localStorage.getItem('schetpro-demo-subscribers')||'[]');if(!list.includes(email))list.push(email);localStorage.setItem('schetpro-demo-subscribers',JSON.stringify(list));box.textContent='Готово! Email сохранён локально в демо на этом устройстве.';box.hidden=false}catch{box.textContent='Хранилище браузера недоступно.';box.hidden=false}})}
+</script>
 </body>
 </html>
